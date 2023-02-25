@@ -1,0 +1,5 @@
+$purple-primary: $palette-mcgpalette0-700;
+$purple-accent: $palette-mcgpalette1-A100;
+$purple-warn: $palette-mcgpalette1-A400;
+
+$purple-theme: nth($purple-primary, $purple-accent, $purple-warn);

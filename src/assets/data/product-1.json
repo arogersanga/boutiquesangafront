@@ -1,0 +1,23 @@
+{ 
+    "id": 1,
+    "name": "Chemise Homme",
+    "images": [
+        {
+          "small": "assets/images/products/VetementsHommes/1-medium.jpg",
+          "medium": "assets/images/products/VetementsHommes/1-medium.jpg",
+          "big": "assets/images/products/VetementsHommes/1-medium.jpg"
+        }
+    ],
+    "oldPrice": null,
+    "newPrice": 35,
+    "discount": null,
+    "ratingsCount": 4,
+    "ratingsValue": 350,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue eleifend nulla vel rutrum. Donec tempus metus non erat vehicula, vel hendrerit sem interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+    "availibilityCount": 5,
+    "cartCount": 0,
+    "color": ["#5C6BC0","#66BB6A","#90A4AE"],
+    "size": ["S","M","L", "XL"],
+    "weight": 150,
+    "categoryId": 100
+}

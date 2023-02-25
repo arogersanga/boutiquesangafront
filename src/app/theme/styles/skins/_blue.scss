@@ -1,0 +1,72 @@
+//@import '~@angular/material/theming';
+/* For use in _color-definitions.scss */
+$palette-mcgpalette0:
+  rgb(232, 240, 248)
+  rgb(197, 218, 238)
+  rgb(158, 194, 227)
+  rgb(119, 170, 215)
+  rgb(90, 151, 207)
+  rgb(61, 133, 198)
+  rgb(55, 125, 192)
+  rgb(47, 114, 185)
+  rgb(39, 104, 177)
+  rgb(26, 85, 164)
+  rgb(218, 233, 255)
+  rgb(167, 202, 255)
+  rgb(116, 171, 255)
+  rgb(91, 156, 255)
+;
+
+$palette-mcgpalette0-50: nth($palette-mcgpalette0, 1);
+$palette-mcgpalette0-100: nth($palette-mcgpalette0, 2);
+$palette-mcgpalette0-200: nth($palette-mcgpalette0, 3);
+$palette-mcgpalette0-300: nth($palette-mcgpalette0, 4);
+$palette-mcgpalette0-400: nth($palette-mcgpalette0, 5);
+$palette-mcgpalette0-500: nth($palette-mcgpalette0, 6);
+$palette-mcgpalette0-600: nth($palette-mcgpalette0, 7);
+$palette-mcgpalette0-700: nth($palette-mcgpalette0, 8);
+$palette-mcgpalette0-800: nth($palette-mcgpalette0, 9);
+$palette-mcgpalette0-900: nth($palette-mcgpalette0, 10);
+$palette-mcgpalette0-A100: nth($palette-mcgpalette0, 11);
+$palette-mcgpalette0-A200: nth($palette-mcgpalette0, 12);
+$palette-mcgpalette0-A400: nth($palette-mcgpalette0, 13);
+$palette-mcgpalette0-A700: nth($palette-mcgpalette0, 14);
+
+
+$palette-mcgpalette1:
+  rgb(232, 245, 233)
+  rgb(200, 230, 201)
+  rgb(165, 214, 167)
+  rgb(129, 199, 132)
+  rgb(102, 187, 106)
+  rgb(76, 175, 80)
+  rgb(67, 160, 71)
+  rgb(56, 142, 60)
+  rgb(46, 125, 50)
+  rgb(27, 94, 32)
+  rgb(185, 246, 202)
+  rgb(105, 240, 174)
+  rgb(0, 230, 118)
+  rgb(0, 200, 83)
+;
+
+$palette-mcgpalette1-50: nth($palette-mcgpalette1, 1);
+$palette-mcgpalette1-100: nth($palette-mcgpalette1, 2);
+$palette-mcgpalette1-200: nth($palette-mcgpalette1, 3);
+$palette-mcgpalette1-300: nth($palette-mcgpalette1, 4);
+$palette-mcgpalette1-400: nth($palette-mcgpalette1, 5);
+$palette-mcgpalette1-500: nth($palette-mcgpalette1, 6);
+$palette-mcgpalette1-600: nth($palette-mcgpalette1, 7);
+$palette-mcgpalette1-700: nth($palette-mcgpalette1, 8);
+$palette-mcgpalette1-800: nth($palette-mcgpalette1, 9);
+$palette-mcgpalette1-900: nth($palette-mcgpalette1, 10);
+$palette-mcgpalette1-A100: nth($palette-mcgpalette1, 11);
+$palette-mcgpalette1-A200: nth($palette-mcgpalette1, 12);
+$palette-mcgpalette1-A400: nth($palette-mcgpalette1, 13);
+$palette-mcgpalette1-A700: nth($palette-mcgpalette1, 14);
+
+$blue-primary: nth($palette-mcgpalette0, 1);
+$blue-accent: nth($palette-mcgpalette0, 2);
+$blue-warn: nth($palette-mcgpalette0, 3);
+
+$blue-theme: $blue-primary;

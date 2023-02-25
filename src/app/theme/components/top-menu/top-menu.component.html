@@ -1,0 +1,50 @@
+<div class="top-menu">
+
+    <a mat-button [matMenuTriggerFor]="currencyMenu" #currencyMenuTrigger="matMenuTrigger">
+    {{currency}}<mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+  </a>
+    <mat-menu #currencyMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+        <span (mouseleave)="currencyMenuTrigger.closeMenu()">
+            <button mat-menu-item *ngFor="let cur of currencies" (click)="changeCurrency(cur)">
+                <span>{{cur}}</span>
+        </button>
+        </span>
+    </mat-menu>
+
+    <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
+        <img [src]="'assets/images/flags/'+translate.currentLang+'.svg'" width="18" [alt]="translate.currentLang">
+        <span fxShow="false" fxShow.gt-sm class="flag-menu-title">{{getLangText(translate.currentLang)}}</span>
+        <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+    </a>
+    <mat-menu #langMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+        <span (mouseleave)="langMenuTrigger.closeMenu()">
+            <button *ngFor="let lang of translate.getLangs()" mat-menu-item (click)="changeLang(lang)">
+                <img [src]="'assets/images/flags/'+lang+'.svg'" width="18" [alt]="lang" class="mat-elevation-z1">
+                <span class="px-1">{{getLangText(lang)}}</span>
+        </button>
+        </span>
+    </mat-menu>
+
+    <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger" (click)="openMegaMenu()">
+        <!--<a mat-button [matMenuTriggerFor]="matMenu" #accountMenuTrigger="matMenuTrigger">-->
+        <mat-icon class="mat-icon-sm account-icon">person</mat-icon>
+      <a mat-button fxShow="false" fxShow.gt-sm>{{ 'LOGIN' | translate }}</a>
+        <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+    </a>
+
+
+    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" class="mega-menu app-dropdown">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutAlign="center center">
+            <div fxLayout="column" class="p-1">
+                <a mat-menu-item routerLink="/login" mat-button (click)="loginClicked()"><b>{{ 'JEMECONNECTEAVECGOOGLE' | translate }}</b></a>
+                <mat-divider style="margin-top: 10%;"></mat-divider>
+            </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <div fxFlex="20" fxLayout="column" class="p-1">
+                <a mat-menu-item routerLink="/login" mat-button (click)="loginClicked()"><b>{{ 'JEMECONNECTE' | translate }}|{{ 'JECREEMONCOMPTE' | translate }}</b></a>
+            </div>
+        </div>
+    </mat-menu>
+</div>

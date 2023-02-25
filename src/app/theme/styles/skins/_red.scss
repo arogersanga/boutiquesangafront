@@ -1,0 +1,5 @@
+$red-primary:  nth($palette-mcgpalette0, 12);
+$red-accent:  nth($palette-mcgpalette0, 8);
+$red-warn:  nth($palette-mcgpalette0, 11);;
+
+$red-theme: nth($red-primary, $red-accent, $red-warn);

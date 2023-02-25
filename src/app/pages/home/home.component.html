@@ -1,0 +1,68 @@
+<app-main-caroussel [slides]="slides"></app-main-caroussel>
+
+<div fxLayout="row wrap" class="info-bar">
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="mat-icon-xlg text-muted m-0">card_giftcard</mat-icon>
+            <div class="content">
+                <p>BONUS PLUS</p>
+                <span class="text-muted m-0">Soyez content de faire du shopping</span>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="mat-icon-xlg text-muted m-0">local_shipping</mat-icon>
+            <div class="content">
+                <p>Pas de frais de port</p>
+                <span class="text-muted m-0">Pas de frais de port pour toute commande plus de 99€</span>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="mat-icon-xlg text-muted m-0">monetization_on</mat-icon>
+            <div class="content">
+                <p>Remboursement garantie!</p>
+                <span class="text-muted m-0">30 jours pour changer d'avis garantie</span>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="mat-icon-xlg text-muted m-0">history</mat-icon>
+            <div class="content">
+                <p>SUPPORT EN LIGNE 24/7</p>
+                <span class="text-muted m-0">Contactez nous au : (+33) 6 00 00 00 00</span>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<app-banners [banners]="banners"></app-banners>
+
+<div class="products-tabs">
+
+    <mat-tab-group mat-stretch-tabs (selectedTabChange)="onLinkClick($event)">
+        <mat-tab label="Tous les Produits">
+            <app-product-caroussel [products]="products"></app-product-caroussel>
+        </mat-tab>
+        <mat-tab label="Featured">
+            <app-product-caroussel [products]="featuredProducts"></app-product-caroussel>
+        </mat-tab>
+        <mat-tab label="On Sale">
+            <app-product-caroussel [products]="onSaleProducts"></app-product-caroussel>
+        </mat-tab>
+        <mat-tab label="Top Rated">
+            <app-product-caroussel [products]="topRatedProducts"></app-product-caroussel>
+        </mat-tab>
+        <mat-tab label="New Arrivals">
+            <app-product-caroussel [products]="newArrivalsProducts"></app-product-caroussel>
+        </mat-tab>
+    </mat-tab-group>
+
+
+</div>
+
+<!--<app-brands-carousel [brands]="brands"></app-brands-carousel>-->
+<!--<app-footer></app-footer>-->

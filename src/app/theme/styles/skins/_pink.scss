@@ -1,0 +1,5 @@
+$pink-primary: $palette-mcgpalette1-400;
+$pink-accent: $palette-mcgpalette0-200;
+$pink-warn: $palette-mcgpalette0-500;
+
+$pink-theme: nth($pink-primary, $pink-accent, $pink-warn);

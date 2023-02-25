@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dan-eden-7e7fb": {
+      "hosting": {
+        "arsangamarche": [
+          "dan-eden-7e7fb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "boutiquesanga"
+  }
+}

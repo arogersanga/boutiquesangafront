@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center align-items-center hello">
+    <div class="login-wrap mx-auto">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">{{ 'JEMECONNECTE' | translate}}</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">{{ 'JECREEUNCOMPTE' | translate  }}</label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label for="user" class="label">Nom d'utilisateur</label>
+                        <input id="user" type="text" class="input" placeholder="Votre email">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Mot de passe</label>
+                        <input id="pass" type="password" class="input" data-type="password" placeholder="Entrez votre mot de passe">
+                    </div>
+                    <!--<div class="group">
+                        <input id="check" type="checkbox" class="check" checked>
+                        <label for="check"><span class="icon"></span> Rester connectez</label>
+                    </div>-->
+                    <div class="group">
+                        <a mat-button type="submit" class="button" value="Sign In" (click)="addLoginClicked(false)">{{ "SIGNIN" | translate }}</a>
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="#forgot">Mot de passe oublié?</a>
+                    </div>
+                </div>
+
+                <form>
+                    <div *ngIf="!isSignedIn" class="sign-up-htm">
+                        <div class="group">
+                            <label for="pass" class="label">Nom d'utilisateur</label>
+                            <input name="email" [(ngModel)]="email" type="text #email" class="form-control input_user" placeholder="Votre email">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Mot de passe</label>
+                            <input name="password" [(ngModel)]="password" type="text #password" class="form-control input_pass" data-type="password" placeholder="Votre mot de passe">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Confirmer votre mot de password</label>
+                            <input name="password" [(ngModel)]="password" type="password" class="form-control input_pass" data-type="Ré-saisir votre mot password">
+                        </div>
+                        <div class="group">
+                            <a mat-button type="submit" class="button" value="Sign Up" (click)="onSignup(email,password)">{{ "SIGNUP" | translate }}</a>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <label for="tab-1">Déjà Membre?</label>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

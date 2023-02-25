@@ -1,0 +1,8 @@
+[
+    { "title": "Nouveaux Pantalons", "subtitle": "A partir de 12euros", "image": "assets/images/products/VetementsHommes/2-medium.jpg" },
+    { "title": "Nouveaux T-shirts", "subtitle": "Offre du jour", "image": "assets/images/products/VetementsFemmes/2-medium.jpg" },
+    { "title": "Nouveaux Robes", "subtitle": "Offre du jour", "image": "assets/images/products/VetementsFemmes/1-medium.jpg" },
+    { "title": "Collections de l'été", "subtitle": "Nouveautés", "image": "assets/images/products/VetementsFemmes/3-medium.png" },
+    { "title": "Chaussures pour vous", "subtitle": "A partir de 25euros", "image": "" },
+    { "title": "Autres categories", "subtitle": "Prix reduits", "image": "assets/images/products/VetementsHommes/1-medium.jpg"  }
+]

@@ -1,0 +1,55 @@
+### CI/CD -> build and send build to dev server and prod serv.
+
+#image: alpine:latest
+
+stages:
+  - build
+  - deploy
+
+#Build angular App
+build_app:
+  stage: build
+  image: node:latest
+  script:
+    - npm install -g @angular/cli@9.1.0
+    #- npm install ng-particles tsparticles
+    - npm install
+    - ng build 
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 2 hours
+  cache:
+    paths:
+      - node_modules/
+  only:
+    - current
+    - master
+
+#Deploy to Dev Environment
+deploy_dev:
+  stage: deploy
+  tags: 
+    - angular-dev-site
+  script:
+    - chmod 400 $SSH_KEY_ANGULAR
+    - ls -lah dist/arsangamarche/
+    - scp -rp -i $SSH_KEY_ANGULAR dist/arsangamarche/* "${SSH_USER_ANGULAR}@${SSH_HOST_DEV_ANGULAR}:/data/modeeden/"
+    - ssh -i $SSH_KEY_ANGULAR "${SSH_USER_ANGULAR}@${SSH_HOST_DEV_ANGULAR}" "cd /data/modeeden/ && ls -l"
+  only:
+    - current
+
+
+#Deploy to Prod
+deploy_prod:
+  stage: deploy
+  tags:
+    - angular-dev-site
+  script:
+    - chmod 400 $SSH_KEY_ANGULAR
+    - ls -lah dist/arsangamarche/
+    - scp -rp -i $SSH_KEY_ANGULAR dist/arsangamarche/* "${SSH_USER_ANGULAR}@${SSH_HOST_DEV_ANGULAR}:/data/modeeden/"
+    - ssh -i $SSH_KEY_ANGULAR "${SSH_USER_ANGULAR}@${SSH_HOST_DEV_ANGULAR}" "cd /data/modeeden/ && ls -l"
+    - ssh -i $SSH_KEY_ANGULAR "${SSH_USER_ANGULAR}@${SSH_HOST_DEV_ANGULAR}" "cd /data/modeeden/ && chmod 776"
+  only:
+    - master

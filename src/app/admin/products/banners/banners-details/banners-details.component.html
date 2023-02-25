@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Slide Details</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div mat-dialog-content>
+        <div fxLayout="row wrap">
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="title" required>
+                    <!-- <mat-error *ngIf="form.controls.title.errors?.required">Title is required</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Subtitle</mat-label>
+                    <input matInput formControlName="subtitle" required>
+                    <mat-error *ngIf="form.controls.subtitle.errors?.required">Subtitle is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Affichage Name</mat-label>
+                    <mat-select formControlName="affichageId">
+                        <mat-option *ngFor="let aff of affichages" [value]="aff.id">
+                            <span>{{aff.name}}</span>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product Name</mat-label>
+                    <mat-select formControlName="productId">
+                        <mat-option *ngFor="let prod of products" [value]="prod.id">
+                            <span>{{prod.name}}</span>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+            <button mat-raised-button color="warn" type="button" mat-dialog-close>Close</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </div>
+    </div>
+</form>

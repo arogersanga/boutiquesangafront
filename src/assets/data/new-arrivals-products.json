@@ -1,0 +1,182 @@
+[    
+    { 
+        "id": 1,
+        "name": "Product 1",
+        "images": [
+            {
+                "small": "Product 1",
+                "medium": "Product 1",
+                "big": "Product 1"
+            },
+            {
+                "small": "Product 1",
+                "medium": "Product 1",
+                "big": "Product 1"
+            },
+            {
+                "small": "Product 1",
+                "medium": "Product 1",
+                "big": "Product 1"
+            }
+        ],
+        "oldPrice": null,
+        "newPrice": 475,
+        "discount": null,
+        "ratingsCount": 7,
+        "ratingsValue": 550,
+        "description": "Description produit.",
+        "availibilityCount": 5,
+        "cartCount": 0,
+        "categoryId": 32
+    },
+    { 
+        "id": 2,
+        "name": "Product 2",
+        "images": [
+            {
+                "small": "Product 2",
+                "medium": "Product 2",
+                "big": "Product 2"
+            },
+            {
+                "small": "Product 2",
+                "medium": "Product 2",
+                "big": "Product 2"
+            },
+            {
+                "small": "Product 2",
+                "medium": "Product 2",
+                "big": "Product 2"
+            }
+        ],
+        "oldPrice": 510,
+        "newPrice": 179.99,
+        "discount": 5,
+        "ratingsCount": 6,
+        "ratingsValue": 600,
+        "description": "Description produit.",
+        "availibilityCount": 3,
+        "cartCount": 0,
+        "categoryId": 150
+    },    
+    { 
+        "id": 3,
+        "name": "Product 3",
+        "images": [
+            {
+                "small": "Product 3",
+                "medium": "Product 3",
+                "big": "Product 3"
+            },
+            {
+                "small": "Product 3",
+                "medium": "Product 3",
+                "big": "Product 3"
+            },
+            {
+                "small": "Product 3",
+                "medium": "Product 3",
+                "big": "Product 3"
+            }
+        ],
+        "oldPrice": null,
+        "newPrice": 30,
+        "discount": null,
+        "ratingsCount": 11,
+        "ratingsValue": 1050,
+        "description": "Description produit.",
+        "availibilityCount": 5,
+        "cartCount": 0,
+        "categoryId": 200
+    },   
+    { 
+        "id": 4,
+        "name": "Product 4",
+        "images": [
+            {
+                "small": "Product 4",
+                "medium": "Product 4",
+                "big": "Product 4"
+            },
+            {
+                "small": "Product 4",
+                "medium": "Product 4",
+                "big": "Product 4"
+            },
+            {
+                "small": "Product 4",
+                "medium": "Product 4",
+                "big": "Product 4"
+            }
+        ],
+        "oldPrice": 655,
+        "newPrice": 379.99,
+        "discount": 20,
+        "ratingsCount": 6,
+        "ratingsValue": 500,
+        "description": "Description produit.",
+        "availibilityCount": 2,
+        "cartCount": 0,
+        "categoryId": 250
+    },
+    { 
+        "id": 5,
+        "name": "Product 5",
+        "images": [
+            {
+                "small": "Product 5",
+                "medium": "Product 5",
+                "big": "Product 5"
+            },
+            {
+                "small": "Product 5",
+                "medium": "Product 5",
+                "big": "Product 5"
+            },
+            {
+                "small": "Product 5",
+                "medium": "Product 5",
+                "big": "Product 5"
+            }
+        ],
+        "oldPrice": null,
+        "newPrice": 876,
+        "discount": null,
+        "ratingsCount": 2,
+        "ratingsValue": 200,
+        "description": "Description produit.",
+        "availibilityCount": 0,
+        "cartCount": 0,
+        "categoryId": 200
+    },
+    { 
+        "id": 6,
+        "name": "Product 6",
+        "images": [
+            {
+                "small": "Product 6",
+                "medium": "Product 6",
+                "big": "Product 6"
+            },
+            {
+                "small": "Product 6",
+                "medium": "Product 6",
+                "big": "Product 6"
+            },
+            {
+                "small": "Product 6",
+                "medium": "Product 6",
+                "big": "Product 6"
+            }
+        ],
+        "oldPrice": null,
+        "newPrice": 450,
+        "discount": null,
+        "ratingsCount": 4,
+        "ratingsValue": 300,
+        "description": "Description produit.",
+        "availibilityCount": 3,
+        "cartCount": 0,
+        "categoryId": 150
+    }
+]
