@@ -38,10 +38,25 @@ export class Affichage {
 
 }
 
+export class Image {
+  constructor(public id: number,
+              public value1: string,
+              public value2: string) { }
+
+}
+
+export class ImagesParProduits {
+  constructor(public id: number,
+              public imageIds: Array<number>,
+              public productId: string) { }
+
+}
+
 export class Product {
   constructor(public id: number,
               public name: string,
               public images: Array<any>,
+              public imagesIds: Array<number>,
               public oldPrice: number,
               public newPrice: number,
               public discount: number,

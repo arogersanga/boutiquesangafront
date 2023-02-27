@@ -67,7 +67,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   public getProductById(id: any) {
     this.appService.getProductById(id).subscribe(next=> {
-      let product: Product = new Product(0, '', ['', '', ''], 0, 0, 0, 0
+      let product: Product = new Product(0, '', ['', '', ''], [0], 0, 0, 0, 0
       , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
       if (next) {
         product = next;

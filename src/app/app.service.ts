@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Affichage, AffichagesParProduit, Banners, CategoriesParProduit, Category, Product, Slides} from './app.models';
+import {Affichage, AffichagesParProduit, Banners, CategoriesParProduit, Category, Product, Slides, Image, ImagesParProduits} from './app.models';
 import {environment, filesEnvironment} from 'src/environments/environment';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {reject} from 'q';
@@ -23,17 +23,22 @@ export class Data {
 
 @Injectable()
 export class AppService {
+  imagesIds: number[] = [];
   slidesSubject = new Subject<Slides[]>();
+  imagesSubject = new Subject<Image[]>();
+  imagesParProduitSubject = new Subject<ImagesParProduits[]>();
   loginSubject = new Subject<boolean>();
   productsListSubject = new Subject<Product[]>();
   productsList: Product[] = [];
   datas: Product[] = [];
   affichagesList: Affichage[] = [];
+  imagesList: Image[] = [];
   productsListMap: Map<number, Product> = new Map();
   affichagesParProduit = new AffichagesParProduit(0, [0], 0);
   categoriesParProduit = new CategoriesParProduit(0, [0], 0);
-  product: Product  = new Product(0, '', ['', '', ''], 0, 0, 0, 0
-  , 0, '', 0, 0, [''], [''], 0, [0], []);
+  imagesParProduit = new ImagesParProduits(0, [0], '');
+  product: Product  =  new Product(0, '', ['', '', ''], [0], 0, 0, 0, 0
+  , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
 affichageRecherche: any;
   public Data = new Data(
     [], // categories
@@ -49,6 +54,7 @@ affichageRecherche: any;
   public url = environment.url;
   public urlREST = environment.urlREST;
   public urlFiles = filesEnvironment.urlFiles;
+  image: Image;
 
   constructor(public http: HttpClient, public snackBar: MatSnackBar, private alertService: AlertService, public storage: AngularFireStorage, public fs: AngularFirestore) {
   }
@@ -62,6 +68,13 @@ affichageRecherche: any;
   emitSlidesSubject() {
     if (this.slides) {
       this.slidesSubject.next(Array.from(this.slides));
+    }
+  }
+
+ 
+  emitImagesSubject() {
+    if (this.imagesList) {
+      this.imagesSubject.next(Array.from(this.imagesList));
     }
   }
 
@@ -105,8 +118,17 @@ affichageRecherche: any;
         .get<any>(this.urlREST + 'affichages');
   }
 
+  getImages(): Observable<any> {
+    return this.http
+      .get<any>(this.urlREST + 'images');
+}
+
   getAffichageById(affichageId: number): Observable<Affichage> {
     return this.http.get<Affichage>(this.urlREST + 'affichages/' + affichageId);
+  }
+
+  getImagesById(imageId: number): Observable<Image> {
+    return this.http.get<Image>(this.urlREST + 'images/' + imageId);
   }
  
   getAffichageByName(name: String): Observable<Affichage> {
@@ -130,6 +152,10 @@ affichageRecherche: any;
 
   public getAllProducts(): Observable<any>{        
     return this.http.get<any>(this.urlREST + 'products');
+  }
+
+  public getAllImages(): Observable<any>{        
+    return this.http.get<any>(this.urlREST + 'images');
   }
   
   public getCategories(): Observable<any>{
@@ -184,6 +210,10 @@ affichageRecherche: any;
     this.http.post<Slides>(this.urlREST + 'slideses', slide).subscribe(slide =>{
     });
   }
+  
+  addImage(image: Image, i: number): Observable<any> {
+    return this.http.post<Image>(this.urlREST + 'images', image);
+  }
 
   public getAllBanners(): Observable<any>{
     return this.http.get<any>(this.urlREST + 'bannerses');
@@ -214,12 +244,13 @@ affichageRecherche: any;
   }
 
   public addProduct(product: Product): void {
+    this.imagesIds = [];
     this.assignProduct(product);
     let i = 0;
     product.images.forEach(img => {
         if (i === this.product.images.length - 1) {
           this.uploadFile(this.product, img.file, i).then(() => {
-            this.addProductAfterUpload(this.product);
+           // this.addProductAfterUpload(this.product);
           });
           i++;
         } 
@@ -240,6 +271,7 @@ affichageRecherche: any;
       i++;
     });
   }
+  this.product.imagesIds = [];
   this.product.oldPrice = product.oldPrice;
   this.product.newPrice = product.newPrice;
   this.product.discount = product.discount;
@@ -253,6 +285,10 @@ affichageRecherche: any;
   }
 
   public addProductAfterUpload(product: Product) {
+    product.images = [];
+    product.imagesIds = this.product.imagesIds;
+    console.log('Les ids dimages sont : '+ product.imagesIds);
+    console.log('2. Les ids images sont : '+ this.imagesIds.toString());
     // console.log(product.images.length + '! test length dans add product apres upload');
     this.http.post<Product>(this.urlREST + 'products', product).subscribe(prod => {
       this.affichagesParProduit.affichageIds = prod.affichageIds;
@@ -322,8 +358,23 @@ affichageRecherche: any;
           () => {
             resolve(upload.snapshot.ref.getDownloadURL().then(promise => {
               // console.log(promise.toString + 'this is download url');
-              this.product.images[i] = promise.toString();
-              console.log(this.product.images[i] + ' this is download url product');
+              // this.product.imagesIds[i] = promise.toString();
+
+              let imageDownloadURLValue = promise.toString();
+              let imageDownloadURLValues : Array<string> = [];
+              imageDownloadURLValues = imageDownloadURLValue.split('%');
+              this.image = new Image(0, '', '');
+              this.image.value1 = imageDownloadURLValues[0] + '%';
+              this.image.value2 = imageDownloadURLValues[1];
+              this.addImage(this.image, i).subscribe(image =>{
+                this.imagesIds[i] = image.id;
+              
+                if(this.imagesIds.length - 1 === i){
+                  this.product.imagesIds = this.imagesIds; 
+                  this.addProductAfterUpload(this.product);
+                  console.log(this.product.imagesIds.toString() + ' this is download url product ids');
+                }
+            });
              }));
           });
       }
