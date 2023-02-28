@@ -3,14 +3,14 @@
         <mat-card class="product-image" color="warn" selected="true">{{product?.discount}}% OFF
 
             <button mat-icon-button (click)="openZoomViewer()" fxHide="false" fxHide.gt-md><mat-icon>fullscreen</mat-icon></button>
-            <img *ngIf="image" [src]="product.images[0]" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave($event)" />
+            <img *ngIf="image" [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0] )?.value2" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave($event)" />
         </mat-card>
         <div class="small-carousel">
             <div class="swiper-container" [swiper]="config">
                 <div class="swiper-wrapper">
-                    <div *ngFor="let imag of product.images" class="swiper-slide">
+                    <div *ngFor="let imag of product.imagesIds" class="swiper-slide">
                         <mat-card (click)="selectImage(imag)" class="p-1">
-                            <img [attr.data-src]="imag" class="swiper-lazy" />
+                            <img [src]="(images | filterById : imag )?.value1 + ( images | filterById : imag )?.value2" class="swiper-lazy" />
                             <div class="swiper-lazy-preloader"></div>
                         </mat-card>
                     </div>

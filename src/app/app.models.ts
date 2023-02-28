@@ -48,14 +48,20 @@ export class Image {
 export class ImagesParProduits {
   constructor(public id: number,
               public imageIds: Array<number>,
-              public productId: string) { }
+              public productId: number) { }
+
+}
+
+export class ImagesProduits {
+  constructor(public id: number,
+              public images: Array<any>,
+              public productId: number) { }
 
 }
 
 export class Product {
   constructor(public id: number,
               public name: string,
-              public images: Array<any>,
               public imagesIds: Array<number>,
               public oldPrice: number,
               public newPrice: number,

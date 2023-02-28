@@ -2,7 +2,8 @@
     <div class="swiper-container h-100" [swiper]="config">
         <div class="swiper-wrapper h-100">
             <div *ngFor="let slide of slides" class="swiper-slide">
-                <div [style.background-image]="'url(' + (products | filterById : slide.productId)?.images[0] + ')'" class="slide-item swiper-lazy">
+                <div [style.background-image]="'url(' + (images | filterById : (products | filterById : slide.productId)?.imagesIds[0])?.value1
+                (images | filterById : (products | filterById : slide.productId)?.imagesIds[0])?.value2 + ')'" class="slide-item swiper-lazy">
                     <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                     <div class="mask"></div>
                     <div fxLayout="column" fxLayoutAlign="center center" class="content">

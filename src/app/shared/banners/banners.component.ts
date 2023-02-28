@@ -11,6 +11,7 @@ import { AppService } from 'src/app/app.service';
 export class BannersComponent implements OnInit {
   @Input() banners: Array<Banners>;
   public products: Array<Product> = [];
+  images: Array<string> = [];
   constructor(public appService: AppService, private alertService: AlertService) { }
 
   ngOnInit() { 
@@ -25,6 +26,16 @@ export class BannersComponent implements OnInit {
       }
       });
   }
+
+  public getAllImages() {
+    this.images = [];
+    this.appService.getAllImages().subscribe(next => {
+      if (next) {
+        this.images = next._embedded.images;
+      }
+      });
+  }
+
   public getBanner(index): Banners{
     return this.banners[index];
   }
@@ -37,7 +48,7 @@ export class BannersComponent implements OnInit {
       }
     });
     let bgImage = {
-      'background-image': index != null ? "url(" + product?.images[0] + ")" : "url(https://via.placeholder.com/600x400/ff0000/fff/)"
+      'background-image': index != null ? "url(" + product?.imagesIds[0] + ")" : "url(https://via.placeholder.com/600x400/ff0000/fff/)"
     };
     return bgImage;
   } 

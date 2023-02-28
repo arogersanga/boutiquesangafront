@@ -5,7 +5,8 @@
 export const environment = {
   production: true,
   url: '',
-  urlREST: 'https://boutiqueapisanga.herokuapp.com/',
+   urlREST: 'https://boutiqueapisanga.herokuapp.com/',
+  //urlREST: 'http://localhost:8080/',
   urlFiles: 'assets/images/products/'
 };
 /*

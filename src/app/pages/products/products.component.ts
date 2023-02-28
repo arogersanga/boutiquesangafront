@@ -12,7 +12,7 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {AppService} from '../../app.service';
-import {Product, Category, Affichage} from '../../app.models';
+import {Product, Category, Affichage, Image} from '../../app.models';
 import {Settings, AppSettings} from 'src/app/app.settings';
 import {isPlatformBrowser} from '@angular/common';
 import {ProductDialogComponent} from '../../shared/product-caroussel/product-dialog/product-dialog.component';
@@ -40,6 +40,7 @@ export class ProductsComponent implements OnInit, AfterViewInit,OnDestroy {
   public sortings = ['Sort by Default', 'Best match', 'Lowest first', 'Highest first'];
   public sort: any;
   public products : Product[];
+  public images : Image[];
   public affichages: Affichage[] = [];
   public categories: Category[] = [];
   public brands = [];
@@ -124,6 +125,21 @@ export class ProductsComponent implements OnInit, AfterViewInit,OnDestroy {
     );
     this.appService.getProductsList();
   }
+
+  public getImages() {
+    this.appService.getImages()
+      .subscribe(next => {
+   
+        if (next) {
+          this.images = next._embedded.images;
+          console.log(this.images + 'affich list');
+        }
+        },
+        error => {
+          this.handleError(error);
+        });
+  }
+
   public getAffichages() {
     this.appService.getAffichages()
       .subscribe(next => {

@@ -1,6 +1,6 @@
 import {Component, OnInit, HostListener, DoCheck, AfterViewInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-import {Affichage, Category, Product} from 'src/app/app.models';
+import {Affichage, Category, Product, Image} from 'src/app/app.models';
 import {ConfirmDialogComponent} from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AlertService} from '../../../alert-service.service';
@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 })
 export class ProductListComponent implements OnInit, DoCheck, AfterViewInit {
   public products: Array<Product> = [];
+  public images: Array<Image> = [];
   public productsMap: Map<number, Product> = new Map();
   public affichagesMap: Map<number, Affichage> = new Map();
   public categoriesMap: Map<number, Category> = new Map();
@@ -29,7 +30,7 @@ export class ProductListComponent implements OnInit, DoCheck, AfterViewInit {
     if (window.innerWidth < 1280) {
       this.viewCol = 33.3;
     }
-
+    this.getImages();
     this.getCategories();
     this.getAffichages();
     this.getAllProducts();
@@ -45,6 +46,19 @@ export class ProductListComponent implements OnInit, DoCheck, AfterViewInit {
           if (next) {
             this.categories = next._embedded.categories;
             console.log(this.categories + 'categories list');
+          }
+      },
+      error => {
+        this.handleError(error);
+      });
+  }
+
+  public getImages() {
+    this.appService.getImages()
+    .subscribe(next => {
+          if (next) {
+            this.images = next._embedded.images;
+            //console.log(this.images + 'images list');
           }
       },
       error => {

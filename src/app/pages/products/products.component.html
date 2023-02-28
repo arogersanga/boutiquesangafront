@@ -120,7 +120,7 @@
                         <mat-chip color="warn" selected="true">{{product.discount}}% SOLDES</mat-chip>
                     </mat-chip-list>
                     <a [routerLink]="['/products/',  product.id, product.id]" class="image-link">
-                        <img [src]="product.images[0]" alt="">
+                        <img [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0] )?.value2" alt="">
                     </a>
                     <h4 class="category text-muted">{{ ( categories | filterById : product.categoryIds[0] )?.name }}</h4>
                     <a [routerLink]="['/products/', product.id]" class="title text-truncate">
@@ -150,7 +150,7 @@
                                 <mat-chip color="warn" selected="true">{{product.discount}}% OFF</mat-chip>
                             </mat-chip-list>
                             <a [routerLink]="['/products/', product.id, product.id]" class="image-link">
-                                <img [src]="product.images[0]" alt="">
+                                <img [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0] )?.value2" alt="">
                             </a>
                         </div>
                         <div fxFlex="100" fxFlex.gt-xs="60" class="p-2">

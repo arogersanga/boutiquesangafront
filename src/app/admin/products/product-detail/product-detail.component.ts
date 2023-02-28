@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {ActivatedRoute} from '@angular/router';
 import {AppService} from 'src/app/app.service';
 import {SwiperDirective, SwiperConfigInterface} from 'ngx-swiper-wrapper';
-import {Affichage, Category, Product} from 'src/app/app.models';
+import {Affichage, Category, Product, Image} from 'src/app/app.models';
 import {ProductZoomComponent} from './product-zoom/product-zoom.component';
 import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -18,13 +18,14 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   @ViewChild('zoomViewer') zoomViewer;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
   public config: SwiperConfigInterface = {};
-  public product: Product;
+  public product: Product =  new Product(0, '', [0], 0, 0, 0, 0
+  , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
   public image: any;
   public zoomImage: any;
   public form: FormGroup;
   public categories: Array<Category> = [];
   public affichages: Array<Affichage> = [];
-
+  images: Array<Image> = [];
   constructor(public alertService: AlertService, public appService: AppService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public formBuilder: FormBuilder) {
   }
 
@@ -37,6 +38,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     });
     this.getCategories();
     this.getAffichages();
+    this.getImages();
   }
 
   handleError(error): void {
@@ -67,22 +69,22 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   public getProductById(id: any) {
     this.appService.getProductById(id).subscribe(next=> {
-      let product: Product = new Product(0, '', ['', '', ''], [0], 0, 0, 0, 0
+      let product: Product =  new Product(0, '', [0], 0, 0, 0, 0
       , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
       if (next) {
         product = next;
-        // console.log(product + 'produits dans product detail');
+        console.log(product.imagesIds.toString() + 'produits dans product detail');
       
       
         //     console.log(product + 'premiers produits');
     
         // console.log(next + 'chaque produit');
        
-        // product.name = next.name;
+        //product.name = next.name;
         // product.id = next.id;
-        // if (next.images) {
-        //   product.images = next.images;
-        // }
+         if (next.images) {
+           product.imagesIds = next.imagesIds;
+         }
         // product.oldPrice = next.oldPrice;
         // product.newPrice = next.newPrice;
         // product.discount = next.discount;
@@ -127,6 +129,18 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
           this.handleError(error);
         });
     this.appService.Data.affichageList = this.affichages;
+  }
+
+  public getImages() {
+    this.appService.getImages()
+      .subscribe(next => {
+        if (next) {
+          this.images = next._embedded.images;
+        }
+        },
+        error => {
+          this.handleError(error);
+        });
   }
 
   public selectImage(image) {

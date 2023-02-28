@@ -24,9 +24,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
   public categories: Category[] = [];
   public affichages: Affichage[] = [];
+  public images: any[] = [];
   private sub: any;
   public id: any;
-  public product: Product =  new Product(0, '', ['', '', ''], [0], 0, 0, 0, 0
+  public product: Product =  new Product(0, '', [0], 0, 0, 0, 0
   , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
 
   constructor(public appService: AppService, 
@@ -107,15 +108,15 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   public getProductById() {
     this.appService.getProductById(this.id).subscribe(myObjectFound => {
-      const product: Product =  new Product(0, '', ['', '', ''], [0], 0, 0, 0, 0
+      const product: Product =  new Product(0, '', [0], 0, 0, 0, 0
       , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
       product.name = myObjectFound.name;
       product.id = myObjectFound.id;
-      if (myObjectFound.images.arrayValue) {
-        product.images[0] = myObjectFound.images[0];
-        console.log(product.images[0] + ' lien premier image');
+      if (myObjectFound.imagesIds.arrayValue) {
+        product.imagesIds[0] = myObjectFound.imagesIds[0];
+        console.log(product.imagesIds[0] + ' lien premier image');
       } else {
-        product.images = myObjectFound.images;
+        product.imagesIds = myObjectFound.imagesIds;
       }
       product.imagesIds = myObjectFound.imagesIds;
       product.oldPrice = myObjectFound.oldPrice;
@@ -133,9 +134,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
       product.id = myObjectFound.id;
       this.form.patchValue(product);
       this.selectedColors = myObjectFound.color[0];
-      if (myObjectFound.images.arrayValue) {
+      if (myObjectFound.imagesIds.arrayValue) {
         for (let i = 0; i < myObjectFound.images.length; i++) {
-          this.product.images[i] = myObjectFound.images[i];
+          this.product.imagesIds[i] = myObjectFound.imagesIds[i];
         }
       }
       if (myObjectFound.color.arrayValue) {
@@ -149,7 +150,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         }
       }
       console.log(this.product + ' à la fin de get');
-      this.form.controls.images.setValue(this.product.images);
+      this.form.controls.images.setValue(this.product.imagesIds);
     });
   }
 
@@ -157,11 +158,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
     console.log(this.product + ' product value');
     if (this.form.valid) {
       this.product = this.form.value;
+      this.images = this.form.value.images;
       if (this.product) {
         const index: number = this.products.findIndex(x => x.id === this.product.id);
         if (index === -1) {
           console.log(this.product);
-          this.appService.addProduct(this.product);
+          this.appService.addProduct(this.product, this.images);
         }
       }
     }

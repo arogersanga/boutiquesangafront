@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Affichage, AffichagesParProduit, Banners, CategoriesParProduit, Category, Product, Slides, Image, ImagesParProduits} from './app.models';
+import {Affichage, AffichagesParProduit, Banners, CategoriesParProduit, Category, Product, Slides, Image, ImagesParProduits, ImagesProduits} from './app.models';
 import {environment, filesEnvironment} from 'src/environments/environment';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {reject} from 'q';
@@ -36,9 +36,11 @@ export class AppService {
   productsListMap: Map<number, Product> = new Map();
   affichagesParProduit = new AffichagesParProduit(0, [0], 0);
   categoriesParProduit = new CategoriesParProduit(0, [0], 0);
-  imagesParProduit = new ImagesParProduits(0, [0], '');
-  product: Product  =  new Product(0, '', ['', '', ''], [0], 0, 0, 0, 0
-  , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
+  imagesParProduit = new ImagesParProduits(0, [0], 0);
+  imagesDunProduit = new ImagesProduits(0, [''], 0);
+  product: Product  =  new Product(0, '', [0], 0, 0, 0, 0
+  , 0, '', 0, 0, [''], [''], 0, [0], [0]);
+  i: number = 0; 
 affichageRecherche: any;
   public Data = new Data(
     [], // categories
@@ -211,7 +213,7 @@ affichageRecherche: any;
     });
   }
   
-  addImage(image: Image, i: number): Observable<any> {
+  addImage(image: Image): Observable<any> {
     return this.http.post<Image>(this.urlREST + 'images', image);
   }
 
@@ -243,34 +245,30 @@ affichageRecherche: any;
     return this.http.get<any>(this.urlREST + 'affichagesParProduits');
   }
 
-  public addProduct(product: Product): void {
+  public addProduct(product: Product, images: any[]): void {
     this.imagesIds = [];
     this.assignProduct(product);
-    let i = 0;
-    product.images.forEach(img => {
-        if (i === this.product.images.length - 1) {
-          this.uploadFile(this.product, img.file, i).then(() => {
+    this.i = images.length;
+    images.forEach(img => {
+       // if (i === images.length - 1) {
+          this.uploadFile(this.product, img.file, this.i).then(() => {
+        
+            console.log('imagesIds = ' + this.imagesIds);
            // this.addProductAfterUpload(this.product);
-          });
-          i++;
-        } 
-        if (i < this.product.images.length - 1) {
-          this.uploadFile(this.product, img.file, i);
-          i++;
-        }  
+        });
+        //   i++;
+        // } 
+        // if (i < images.length - 1) {
+        //   this.uploadFile(this.product, img.file, i);
+     //     i++;
+       // }  
     });
   }
+
+
   public assignProduct(product: Product){
   this.product.id = product.id;
   this.product.name = product.name;
-  if (product.images) {
-    let i = 0;
-    product.images.forEach(img => {
-      this.product.images[i] = img.toString()
-      ;
-      i++;
-    });
-  }
   this.product.imagesIds = [];
   this.product.oldPrice = product.oldPrice;
   this.product.newPrice = product.newPrice;
@@ -284,10 +282,10 @@ affichageRecherche: any;
   this.product.affichageIds= product.affichageIds;
   }
 
-  public addProductAfterUpload(product: Product) {
-    product.images = [];
-    product.imagesIds = this.product.imagesIds;
-    console.log('Les ids dimages sont : '+ product.imagesIds);
+  public addProductAfterUpload(product: Product, imagesIds: number[]) {
+    //product.images = [];
+    product.imagesIds = imagesIds;
+    
     console.log('2. Les ids images sont : '+ this.imagesIds.toString());
     // console.log(product.images.length + '! test length dans add product apres upload');
     this.http.post<Product>(this.urlREST + 'products', product).subscribe(prod => {
@@ -295,7 +293,7 @@ affichageRecherche: any;
       this.affichagesParProduit.productId = prod.id;
       this.http.post<AffichagesParProduit>(this.urlREST + 'affichagesParProduits', this.affichagesParProduit)
       .subscribe(affichagesParProduit => {
-        // console.log(affichagesParProduit);
+         console.log('affich par produits : ' + affichagesParProduit);
       });
       this.categoriesParProduit.categoryIds = prod.categoryIds;
       this.categoriesParProduit.productId = prod.id;
@@ -327,7 +325,7 @@ affichageRecherche: any;
     const name = `${almostUniqueFileName + i + fileToUpload.name}`;
     // Store form name as "file" with file data
     formData.append('file', fileToUpload, name);
-    this.product.images[i] = 'http://94.23.247.20:8002/assets/images/img/' + name;
+    //this.product.images[i] = 'http://94.23.247.20:8002/assets/images/img/' + name;
    // let headers = new HttpHeaders();
     let httpOptions = {
       headers: new HttpHeaders({
@@ -359,21 +357,21 @@ affichageRecherche: any;
             resolve(upload.snapshot.ref.getDownloadURL().then(promise => {
               // console.log(promise.toString + 'this is download url');
               // this.product.imagesIds[i] = promise.toString();
-
+              this.i = i;
+              console.log('i = ' + this.i);
               let imageDownloadURLValue = promise.toString();
               let imageDownloadURLValues : Array<string> = [];
-              imageDownloadURLValues = imageDownloadURLValue.split('%');
+              imageDownloadURLValues = imageDownloadURLValue.split('images%');
               this.image = new Image(0, '', '');
-              this.image.value1 = imageDownloadURLValues[0] + '%';
+              this.image.value1 = imageDownloadURLValues[0] + 'images%';
               this.image.value2 = imageDownloadURLValues[1];
-              this.addImage(this.image, i).subscribe(image =>{
-                this.imagesIds[i] = image.id;
+              this.addImage(this.image).subscribe(image =>{
+                this.imagesIds[this.i - 1] = image.id;
               
-                if(this.imagesIds.length - 1 === i){
-                  this.product.imagesIds = this.imagesIds; 
-                  this.addProductAfterUpload(this.product);
-                  console.log(this.product.imagesIds.toString() + ' this is download url product ids');
+                if( this.i - 1 === 0){
+                 this.addProductAfterUpload(this.product, this.imagesIds);
                 }
+                this.i--
             });
              }));
           });

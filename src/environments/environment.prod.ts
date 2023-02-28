@@ -6,6 +6,7 @@ export const environment = {
   production: true,
   url: '',
   urlREST: 'https://boutiqueapisanga.herokuapp.com/',
+  //urlREST: 'http://localhost:8080/',
   urlFiles: 'https://console.firebase.google.com/project/ecommerce-website-95c9f/storage/ecommerce-website-95c9f.appspot.com/files/~2Fimages'
 };
 

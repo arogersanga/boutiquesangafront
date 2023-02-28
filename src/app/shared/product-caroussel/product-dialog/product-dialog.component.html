@@ -6,8 +6,8 @@
         <div fxFlex="100" fxFlex.gt-sm="50">
             <div class="swiper-container h-100" [swiper]="config">
                 <div class="swiper-wrapper">
-                    <div *ngFor="let image of product.images" class="swiper-slide">
-                        <img [attr.data-src]="image" class="swiper-lazy" />
+                    <div *ngFor="let image of product.imagesIds" class="swiper-slide">
+                        <img [attr.data-src]="( images | filterById : image )?.value1 + ( images | filterById : image )?.value2" class="swiper-lazy" />
                         <div class="swiper-lazy-preloader"></div>
                     </div>
                 </div>
