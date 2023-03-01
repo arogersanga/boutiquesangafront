@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SwiperConfigInterface, SwiperDirective } from 'ngx-swiper-wrapper';
 import { AppService } from '../../../app.service';
-import {Affichage, Category, Product} from '../../../app.models';
+import {Affichage, Category, Product, Image} from '../../../app.models';
 import { ProductZoomComponent } from './product-zoom/product-zoom.component';
 import { ProductListComponent } from 'src/app/admin/products/product-list/product-list.component';
 import { AlertService } from 'src/app/alert-service.service';
@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   public config: SwiperConfigInterface = {};
   public product: Product;
   public image: any;
+  public images: Array<Image>;
   public zoomImage: any;
   private sub: any;
   public form: FormGroup;
@@ -48,6 +49,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
     this.getRelatedProducts();
     this.getCategories();
     this.getAffichages();
+    this.getImages();
   }
 
   ngAfterViewInit() {
@@ -87,6 +89,19 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
     .subscribe(next => {
           if (next) {
             this.categories = next._embedded.categories;
+          }
+      },
+      error => {
+        this.handleError(error);
+      });
+  }
+
+  
+  public getImages() {
+    this.appService.getImages()
+    .subscribe(next => {
+          if (next) {
+            this.images = next._embedded.images;
           }
       },
       error => {

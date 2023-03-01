@@ -2,7 +2,7 @@ import {Component, OnInit, Input, AfterViewInit, Output} from '@angular/core';
 import { SwiperConfigInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/alert-service.service';
-import { Product, Slides } from 'src/app/app.models';
+import { Product, Slides, Image } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -14,7 +14,9 @@ export class MainCarousselComponent implements OnInit, AfterViewInit {
   slidesSubscription: Subscription;
   @Input() slides: Array<Slides>;
   public products: Array<Product> = [];
-
+  images: Array<Image> = [];
+  imageURL: string = '';
+  image: Image;
   public config: SwiperConfigInterface = {};
 
   private pagination: SwiperPaginationInterface = {
@@ -25,6 +27,7 @@ export class MainCarousselComponent implements OnInit, AfterViewInit {
   constructor(public appService: AppService, private alertService: AlertService) { }
 
   ngOnInit() {
+    this.getAllImages();
    this.getAllProducts();
   }
 
@@ -46,6 +49,15 @@ export class MainCarousselComponent implements OnInit, AfterViewInit {
       speed: 500,
       effect: "slide"
     }
+  }
+
+  public getAllImages() {
+    this.images = [];
+    this.appService.getAllImages().subscribe(next => {
+      if (next) {
+        this.images = next._embedded.images;
+      }
+      });
   }
 
   public getAllProducts() {

@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit{
   public getAllBanners() {
     this.appService.getAllBanners().subscribe(data=>{
       this.banners = data._embedded.bannerses;
-      console.log(this.banners + ' banners dans home.ts');
+      console.log(this.banners[2].productId + ' banners dans home.ts');
     });
   }
 

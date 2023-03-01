@@ -10,7 +10,7 @@
                 <div class="swiper-wrapper">
                     <div *ngFor="let imag of product.imagesIds" class="swiper-slide">
                         <mat-card (click)="selectImage(imag)" class="p-1">
-                            <img [attr.data-src]="imag" class="swiper-lazy" />
+                            <img [src]="(images | filterById : imag )?.value1 + ( images | filterById : imag )?.value2" class="swiper-lazy" />
                             <div class="swiper-lazy-preloader"></div>
                         </mat-card>
                     </div>

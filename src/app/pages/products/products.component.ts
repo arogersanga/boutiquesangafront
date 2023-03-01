@@ -111,6 +111,7 @@ export class ProductsComponent implements OnInit, AfterViewInit,OnDestroy {
         console.log(this.products + ' dans oninit productsComponent')      
       }
     );
+    this.getImages();
     this.appService.getProductsList();
     this.products = this.appService.productsList;
   }
@@ -123,6 +124,7 @@ export class ProductsComponent implements OnInit, AfterViewInit,OnDestroy {
          console.log(this.products + ' dans afterViewInit productsComponent')      
       }
     );
+    this.getImages();
     this.appService.getProductsList();
   }
 
@@ -132,7 +134,7 @@ export class ProductsComponent implements OnInit, AfterViewInit,OnDestroy {
    
         if (next) {
           this.images = next._embedded.images;
-          console.log(this.images + 'affich list');
+          console.log(this.images + 'images list');
         }
         },
         error => {
