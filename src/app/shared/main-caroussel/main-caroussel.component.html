@@ -9,10 +9,10 @@
                     <div fxLayout="column" fxLayoutAlign="center center" class="content">
                         <h1>{{slide.title}}</h1>
                         <h3>{{slide.subtitle}}</h3>
-                        <div fxLayout="column" fxLayoutAlign="center start">
-                            <h4 class="old-price text-muted"><span *ngIf="(products | filterById : slide.productId)?.oldPrice">
-                                {{(products | filterById : slide.productId)?.oldPrice | number : '1.2-2'}}€</span></h4>
-                            <h4 class="new-price">{{(products | filterById : slide.productId)?.newPrice | number : '1.2-2'}}€</h4>
+                        <div fxLayout="row" fxLayoutAlign="center start">
+                            <span class="old-price text-muted"><span *ngIf="(products | filterById : slide.productId)?.oldPrice">
+                                {{(products | filterById : slide.productId)?.oldPrice | number : '1.2-2'}}€</span></span>
+                            <span class="new-price">{{(products | filterById : slide.productId)?.newPrice | number : '1.2-2'}}€</span>
                         </div>
                         <button [routerLink]="['/products', (products | filterById : slide.productId)]" mat-raised-button color="primary"> Voir plus</button>
                     </div>

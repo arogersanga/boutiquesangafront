@@ -1,11 +1,8 @@
 .main-slider {
     height: 500px;
-    // margin-top: 14px;
+    margin-top: 14px;
     .slide-item {
         .content {
-            //margin-top: 5%;
-            //min-height: 30%;
-            //width: 100%;
             z-index: 9;
             position: relative;
             h1 {
@@ -33,6 +30,14 @@
             z-index: 0;
             background-color: rgba(0, 0, 0, 0.1);
         }
+        .old-price {
+            font-size: 18px;
+            font-weight: 45;
+        }
+        .new-price {
+            font-size: 22px;
+            font-weight: 75;
+        }
     }
     .swiper-lazy-preloader {
         top: 18%;
@@ -49,14 +54,20 @@
         height: 280px;
         .slide-item .content {
             h1 {
-                font-size: 24px;
+                margin-top: 70%;
+                font-size: 14px;
                 letter-spacing: 3px;
             }
             h3 {
                 font-size: 18px;
-                margin-bottom: 10px;
+                margin-bottom: 14px;
                 letter-spacing: 2px;
             }
+        }
+        .swiper-slide {
+            background-size: 40%;
+            background-position: top;
+            background-repeat: no-repeat;
         }
     }
 }
@@ -66,14 +77,20 @@
         height: 320px;
         .slide-item .content {
             h1 {
-                font-size: 36px;
+                margin-top: 30%;
+                font-size: 14px;
                 letter-spacing: 3px;
             }
             h3 {
-                font-size: 24px;
+                font-size: 14px;
                 margin-bottom: 20px;
                 letter-spacing: 2px;
             }
+        }
+        .swiper-slide {
+            background-size: 40%;
+            background-position: top;
+            background-repeat: no-repeat;
         }
     }
 }
