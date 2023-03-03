@@ -54,7 +54,7 @@
         height: 280px;
         .slide-item .content {
             h1 {
-                margin-top: 40%;
+                margin-top: 30%;
                 font-size: 14px;
                 letter-spacing: 3px;
             }
@@ -68,6 +68,14 @@
             background-size: 40%;
             background-position: top;
             background-repeat: no-repeat;
+        }
+        .old-price {
+            font-size: 12px;
+            font-weight: 45;
+        }
+        .new-price {
+            font-size: 14px;
+            font-weight: 75;
         }
     }
 }
@@ -91,6 +99,14 @@
             background-size: 40%;
             background-position: top;
             background-repeat: no-repeat;
+        }
+        .old-price {
+            font-size: 12px;
+            font-weight: 45;
+        }
+        .new-price {
+            font-size: 14px;
+            font-weight: 75;
         }
     }
 }

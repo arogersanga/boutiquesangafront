@@ -99,13 +99,16 @@ export class HomeComponent implements OnInit{
    if (affichage) {
       data = this.products?.filter(item=>item.affichageIds.includes(affichage.id));
       console.log(data + ' produits par affichage trouvés dans le service');
+   } else {
+    data = this.products;
    }
+
    if (data) {
         if (typeAffichage.trim().toLowerCase() === 'featured') {  
              console.log(data + ' featured produit trouvés ');
                this.featuredProducts = data;
            }
-           if (typeAffichage.trim().toLowerCase() === 'on-sale') {
+           if (typeAffichage.trim().toLowerCase() === 'on sale') {
              console.log(data + ' featured produit trouvés 2 ');
              this.onSaleProducts = data;
            }
@@ -113,7 +116,7 @@ export class HomeComponent implements OnInit{
              console.log(data + ' featured produit trouvés 3');
                this.topRatedProducts = data;
            }
-           if (typeAffichage.trim().toLowerCase() === 'new-arrivals') {
+           if (typeAffichage.trim().toLowerCase() === 'new arrivals') {
              this.newArrivalsProducts = data;
            }        
      } 

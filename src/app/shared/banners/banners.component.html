@@ -57,7 +57,7 @@
             <div class="banner" fxFlex [style.background-image]="'url(' + (images | filterById : (products | filterById : banners[3].productId)?.imagesIds[0])?.value1 +
                 (images | filterById : (products | filterById : banners[3].productId)?.imagesIds[0])?.value2 + ')'">
 
-                <div class="infoCoteGauche" fxLayoutAlign="space-around center">
+                <div class="infoCoteGauche" fxLayoutAlign="center center">
                     <div class="px-2" fxLayout="column" fxLayoutAlign="end center">
                         <h2 class="title">{{getBanner(3).title}}</h2>
                         <h5 class="subtitle">{{getBanner(3).subtitle}}</h5>

@@ -4,7 +4,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import { AppService } from '../../app.service';
-import { Product } from '../../app.models';
+import { Image, Product } from '../../app.models';
 import { Settings, AppSettings } from 'src/app/app.settings';
 
 
@@ -14,14 +14,19 @@ import { Settings, AppSettings } from 'src/app/app.settings';
   styleUrls: ['./product-caroussel.component.scss']
 })
 export class ProductCarousselComponent implements OnInit, AfterViewInit {
-  @Input() products: Array<Product> = [];
+  //@Input() products1: Array<Product>;
+  public products: Array<Product> = [];
+  public images: Array<Image> = [];
   public config: SwiperConfigInterface = {};
   public settings: Settings;
   constructor(public appSettings: AppSettings, public appService: AppService, public dialog: MatDialog, private router: Router) {
     this.settings = this.appSettings.settings;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getAllImages();
+    this.getAllProducts();
+   }
 
   ngAfterViewInit() {
     this.config = {
@@ -53,6 +58,23 @@ export class ProductCarousselComponent implements OnInit, AfterViewInit {
         }
       }
     };
+  }
+  public getAllImages() {
+    this.images = [];
+    this.appService.getAllImages().subscribe(next => {
+      if (next) {
+        this.images = next._embedded.images;
+      }
+      });
+  }
+
+  public getAllProducts() {
+    this.products = [];
+    this.appService.getAllProducts().subscribe(next => {
+      if (next) {
+        this.products = next._embedded.products;
+      }
+      });
   }
 
   public openProductDialog(product) {

@@ -1,119 +1,199 @@
-.banners-container {
-    margin: 0 -0px;
-    .banner {
-        position: relative;
-        margin: 8px;
-        padding: 0;
-        background-repeat: no-repeat;
-        background-size: 75%;
-        background-position: top;
-        background-origin: content-box;
-        overflow: hidden;
-        transition: 0.15s ease-in;
-        border-color: #f9f7f7;
-        border-style: solid;
-        .info {
-            margin-top: 75%;
-            min-height: 25%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.01);
-            color: #000;
-            padding: 20px 0;
-            transition: 0.15s ease-in;
-            h1 {
-                font-size: 22px;
-            }
-            .title {
-                font-weight: 75;
-                text-align: center;
-            }
-            .subtitle {
-                font-weight: normal;
-                font-style: italic;
-                text-align: center;
-            }
-        }
-        &:hover {
-            .info {
-                background: rgba(0, 0, 0, 0.7);
-            }
-        }
-        .infoCoteGauche {
-            margin-top: 80%;
-            height: 15%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.01);
-            color: #151414;
-            padding: 20px 0;
-            transition: 0.15s ease-in;
-            h1 {
-                font-size: 16px;
-            }
-            .title {
-                font-size: 20px;
-                font-weight: 175;
-                text-align: center;
-            }
-            .subtitle {
-                font-weight: normal;
-                font-style: italic;
-                text-align: center;
-            }
-        }
-        &:hover {
-            .info {
-                background: rgba(0, 0, 0, 0.7);
-            }
-        }
-        .infoBasGauche {
-            margin-top: 65%;
-            min-height: 25%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.01);
-            color: #292525;
-            padding: 20px 0;
-            transition: 0.15s ease-in;
-            h1 {
-                font-size: 22px;
-            }
-            .title {
-                font-size: 22px;
-                font-weight: 75;
-                text-align: center;
-            }
-            .subtitle {
-                font-weight: normal;
-                font-style: italic;
-                text-align: center;
-            }
-        }
-        &:hover {
-            .info {
-                background: rgba(0, 0, 0, 0.7);
-            }
-        }
-        .new-price {
-            font-size: 22px;
-            font-weight: 75;
-        }
-    }
-}
-
-@media (max-width: 959px) {
     .banners-container {
+        margin: 0 -0px;
         .banner {
+            position: relative;
+            margin: 8px;
+            padding: 0;
+            background-repeat: no-repeat;
+            background-size: 75%;
+            background-position: top;
+            background-origin: content-box;
+            overflow: hidden;
+            transition: 0.15s ease-in;
+            border-color: #f9f7f7;
+            border-style: solid;
             .info {
-                padding: 30px 0px;
+                margin-top: 75%;
+                min-height: 25%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.01);
+                color: #000;
+                padding: 20px 0;
+                transition: 0.15s ease-in;
                 h1 {
-                    font-size: 24;
+                    font-size: 22px;
                 }
-                h2 {
+                .title {
+                    font-weight: 75;
+                    text-align: center;
+                }
+                .subtitle {
+                    font-weight: normal;
+                    font-style: italic;
+                    text-align: center;
+                }
+            }
+            &:hover {
+                .info {
+                    background: rgba(0, 0, 0, 0.7);
+                }
+            }
+            .infoCoteGauche {
+                margin-top: 80%;
+                height: 15%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.01);
+                color: #151414;
+                padding: 20px 0;
+                transition: 0.15s ease-in;
+                h1 {
                     font-size: 16px;
                 }
-                h3 {
+                .title {
+                    font-size: 20px;
+                    font-weight: 175;
+                    text-align: center;
+                }
+                .subtitle {
+                    font-weight: normal;
+                    font-style: italic;
+                    text-align: center;
+                }
+            }
+            &:hover {
+                .info {
+                    background: rgba(0, 0, 0, 0.7);
+                }
+            }
+            .infoBasGauche {
+                margin-top: 65%;
+                min-height: 25%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.01);
+                color: #292525;
+                padding: 20px 0;
+                transition: 0.15s ease-in;
+                h1 {
+                    font-size: 22px;
+                }
+                .title {
+                    font-size: 22px;
+                    font-weight: 75;
+                    text-align: center;
+                }
+                .subtitle {
+                    font-weight: normal;
+                    font-style: italic;
+                    text-align: center;
+                }
+            }
+            &:hover {
+                .info {
+                    background: rgba(0, 0, 0, 0.7);
+                }
+            }
+            .new-price {
+                font-size: 22px;
+                font-weight: 75;
+            }
+        }
+    }
+    
+    @media (max-width: 959px) {
+        .banners-container {
+            .banner {
+                height: 100%;
+                flex-direction: row;
+                .info {
+                    padding: 30px 0px;
+                    h1 {
+                        font-size: 24;
+                    }
+                    h2 {
+                        font-size: 16px;
+                    }
+                    h3 {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .infoCoteGauche {
+                padding-top: 90%;
+                height: 10%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.01);
+                color: #151414;
+                padding: 20px 0;
+                transition: 0.15s ease-in;
+                h1 {
+                    font-size: 16px;
+                }
+                .title {
                     font-size: 14px;
+                    font-weight: 75;
+                    text-align: center;
+                }
+                .subtitle {
+                    font-weight: normal;
+                    font-style: italic;
+                    text-align: center;
+                }
+            }
+            &:hover {
+                .info {
+                    background: rgba(0, 0, 0, 0.7);
                 }
             }
         }
     }
-}
+    
+    @media (max-width: 575px) {
+        .banners-container {
+            .banner {
+                //margin-top: 90%;
+                height: 1%;
+                width: 100%;
+                height: 100%;
+                //flex-direction: row;
+                .info {
+                    padding: 30px 0px;
+                    h1 {
+                        font-size: 24;
+                    }
+                    h2 {
+                        font-size: 16px;
+                    }
+                    h3 {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .infoCoteGauche {
+                margin-top: 90%;
+                height: 1%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.01);
+                color: #151414;
+                padding: 200%;
+                transition: 0.15s ease-in;
+                h1 {
+                    font-size: 16px;
+                }
+                .title {
+                    font-size: 14px;
+                    font-weight: 75;
+                    text-align: bottom;
+                }
+                .subtitle {
+                    font-weight: normal;
+                    font-style: italic;
+                    text-align: bottom;
+                }
+            }
+            &:hover {
+                .info {
+                    background: rgba(0, 0, 0, 0.7);
+                }
+            }
+        }
+    }
