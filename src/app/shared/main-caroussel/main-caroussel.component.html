@@ -14,7 +14,7 @@
                                 {{(products | filterById : slide.productId)?.oldPrice | number : '1.2-2'}}€</span></span>
                             <span class="new-price">{{(products | filterById : slide.productId)?.newPrice | number : '1.2-2'}}€</span>
                         </div>
-                        <button [routerLink]="['/products', (products | filterById : slide.productId)]" mat-raised-button color="primary"> Voir plus</button>
+                        <button [routerLink]="['/products', slide.productId, slide.productId]" mat-raised-button color="primary"> Voir plus</button>
                     </div>
                 </div>
             </div>
