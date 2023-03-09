@@ -45,11 +45,11 @@
                     <mat-chip-list *ngIf="product.discount">
                         <mat-chip color="warn" selected="true">{{product.discount}}% SOLDES</mat-chip>
                     </mat-chip-list>
-                    <a [routerLink]="['/products/',  product.id, product.id]" class="image-link">
+                    <a [routerLink]="['/products/',  product.id]" class="image-link">
                         <img [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0] )?.value2" alt="">
                     </a>
-                    <h4 class="category text-muted">{{ ( categories | filterById : product.categoryIds[0] )?.name }}</h4>
-                    <a [routerLink]="['/products/', product.id, product.id]" class="title text-truncate">
+                    <h4 class="category text-muted">{{ ( categories | filterById : product.categoryId )?.name }}</h4>
+                    <a [routerLink]="['/products/', product.id]" class="title text-truncate">
             {{product.name}}
           </a>
                     <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
@@ -75,13 +75,13 @@
                             <mat-chip-list *ngIf="product.discount" class="list-view">
                                 <mat-chip color="warn" selected="true">{{product.discount}}% OFF</mat-chip>
                             </mat-chip-list>
-                            <a [routerLink]="['/products/', product.id, product.id]" class="image-link">
+                            <a [routerLink]="['/products/', product.id]" class="image-link">
                                 <img [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0] )?.value2" alt="">
                             </a>
                         </div>
                         <div fxFlex="100" fxFlex.gt-xs="60" class="p-2">
-                            <h4 class="category text-muted">{{ ( categories | filterById : product.categoryIds[0] )?.name }}</h4>
-                            <a [routerLink]="['/products/', product.id, product.id]" class="title">
+                            <h4 class="category text-muted">{{ ( categories | filterById : product.categoryId )?.name }}</h4>
+                            <a [routerLink]="['/products/', product.id]" class="title">
                 {{product.name}}
               </a>
                             <p class="py-1 text-muted lh">{{product.description}}</p>

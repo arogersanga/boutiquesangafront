@@ -4,13 +4,13 @@
     <mat-menu #menuHommes="matMenu" [overlapTrigger]="false" class="mega-menu app-dropdown">
         <div fxLayout="row wrap">
             <div fxFlex="20" fxLayout="column" class="p-1">
-                <a mat-menu-item [routerLink]="['/products', 'bouclesdoreilles']" (click)="addCategoryRoute('Boucles d\'oreilles')"><b>{{ 'NAV.BOUCLESOREILLES' | translate}}</b></a>
+                <a mat-menu-item [routerLink]="['/products', 'bouclesdoreilles']" (click)="addCategoryRoute('bouclesdoreilles')"><b>{{ 'NAV.BOUCLESOREILLES' | translate}}</b></a>
                 <mat-divider></mat-divider>
-                <a mat-menu-item [routerLink]="['/products', 'formeafrique']" (click)="addCategoryRoute('Boucles d\'oreilles')">AFRIQUE MAP</a>
-                <a mat-menu-item [routerLink]="['/products', 'formecoeur']" (click)="addCategoryRoute('Boucles d\'oreilles')">FORME COEUR</a>
-                <a mat-menu-item [routerLink]="['/products', 'formepomme']" (click)="addCategoryRoute('Boucles d\'oreilles')">FORME POMME</a>
-                <a mat-menu-item [routerLink]="['/products', 'formefeuille']" (click)="addCategoryRoute('Boucles d\'oreilles')">FORME FEUILLE</a>
-                <a mat-menu-item [routerLink]="['/products', 'formelosange']" (click)="addCategoryRoute('Boucles d\'oreilles')">FORME LOSANGE</a>
+                <a mat-menu-item [routerLink]="['/products', 'formeafrique']" (click)="addCategoryRoute('afriquemap')">AFRIQUE MAP</a>
+                <a mat-menu-item [routerLink]="['/products', 'formecoeur']" (click)="addCategoryRoute('formecoeur')">FORME COEUR</a>
+                <a mat-menu-item [routerLink]="['/products', 'formepomme']" (click)="addCategoryRoute('formepomme')">FORME POMME</a>
+                <a mat-menu-item [routerLink]="['/products', 'formefeuille']" (click)="addCategoryRoute('formefeuille')">FORME FEUILLE</a>
+                <a mat-menu-item [routerLink]="['/products', 'formelosange']" (click)="addCategoryRoute('formelosange')">FORME LOSANGE</a>
             </div>
             <div fxFlex="20" class="p-1">
                 <a mat-menu-item [routerLink]="['/products', 'bracelets']" (click)="addCategoryRoute('bracelets')"><b>{{ 'NAV.BRACELETS' | translate}}</b></a>
@@ -19,10 +19,10 @@
                 <button mat-menu-item [routerLink]="['/products', 'grosbracelets']" (click)="addCategoryRoute('bracelets')">GROS BRACELETS</button>
             </div>
             <div fxFlex="20" class="p-1">
-                <button mat-menu-item [routerLink]="['/products', 'porteclés']" (click)="addCategoryRoute('porte clés')"><b>{{ 'NAV.PORTESCLES' | translate }}</b></button>
+                <button mat-menu-item [routerLink]="['/products', 'porteclés']" (click)="addCategoryRoute('portecles')"><b>{{ 'NAV.PORTESCLES' | translate }}</b></button>
                 <mat-divider></mat-divider>
-                <button mat-menu-item [routerLink]="['/products', 'portesclesavecmots']" (click)="addCategoryRoute('porte clés')">PORTES CLES MOTS INSCRITS</button>
-                <button mat-menu-item [routerLink]="['/products', 'portesclessansmots']" (click)="addCategoryRoute('porte clés')">PORTES CLES SANS MOTS</button>
+                <button mat-menu-item [routerLink]="['/products', 'portesclesavecmots']" (click)="addCategoryRoute('porteclespersonnalises')">PORTES CLES MOTS INSCRITS</button>
+                <button mat-menu-item [routerLink]="['/products', 'portesclessansmots']" (click)="addCategoryRoute('portecles')">PORTES CLES SANS MOTS</button>
             </div>
         </div>
     </mat-menu>

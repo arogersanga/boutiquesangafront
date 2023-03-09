@@ -14,7 +14,7 @@ export class AffichagesParProduit {
 
 export class CategoriesParProduit {
   constructor(public id: number,
-              public categoryIds: Array<number>,
+              public categoryId: number,
               public productId: number) { }
 }
 export class Banners {
@@ -74,7 +74,7 @@ export class Product {
               public color: Array<string>,
               public size: Array<any>,
               public weight: number,
-              public categoryIds: Array<number>,
+              public categoryId: number,
               public affichageIds: Array<number>
   ) { }
 }

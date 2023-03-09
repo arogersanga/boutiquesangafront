@@ -17,6 +17,7 @@ export class CategoryListComponent implements DoCheck, OnInit {
 
   public ngOnInit() {
     this.cats = this.categories
+    console.log("les categories sont : " + this.categories)
   }
   public ngDoCheck() {
     if (this.cats && !this.mainCategories) {

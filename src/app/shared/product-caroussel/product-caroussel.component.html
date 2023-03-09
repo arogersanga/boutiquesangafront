@@ -9,7 +9,7 @@
                     <img [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0])?.value2" class="swiper-lazy" />
                     <div class="swiper-lazy-preloader"></div>
                 </a>
-                <h4 class="category text-muted">{{ ( appService.Data.categories | filterById : product.categoryIds[0] )?.name }}</h4>
+                <h4 class="category text-muted">{{ ( appService.Data.categories | filterById : product.categoryId )?.name }}</h4>
                 <a [routerLink]="['/products', product.id, product.id]" class="title text-truncate">
           {{product.name}}
         </a>

@@ -28,9 +28,9 @@
 
         <h2>{{product?.name}}</h2>
         <div class="py-1 lh">
-            <p><span *ngFor="let cat of product.categoryIds" class="text-muted fw-500">Categorie :
+            <p><span *ngIf="product.categoryId" class="text-muted fw-500">Categorie :
             
-                 {{ (categories | filterById : cat )?.name + ' | '}}
+                 {{ (categories | filterById : product.categoryId )?.name + ' | '}}
             
         </span></p>
             <p>Affichage:

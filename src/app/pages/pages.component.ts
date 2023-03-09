@@ -46,8 +46,8 @@ export class PagesComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit() {
-    this.getCategories();
-    this.getAllProducts();
+    // this.getCategories();
+  
     this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
     setTimeout(() => {
       this.settings.theme = 'green';
@@ -62,7 +62,7 @@ export class PagesComponent implements OnInit, OnChanges, AfterViewInit {
     this.datas = [];
     let categorie = this.categories?.filter(item=>item.name.includes(categorieName))[0];
     if (categorie) {
-       this.datas = this.produits?.filter(item=>item.categoryIds.includes(categorie.id));
+       this.datas = this.produits?.filter(item=>item.categoryId == categorie.id);
     }
     if (!categorie) {
         this.datas = this.produits;
@@ -95,11 +95,15 @@ export class PagesComponent implements OnInit, OnChanges, AfterViewInit {
     this.appService.getCategories().subscribe(next => {
       if (next) {
         this.categories = next._embedded.categories;
+        
+    console.log("les categories sont : " + this.categories)
       }
     });
     
     this.category = this.categories[0];
     this.appService.Data.categories = this.categories;
+    
+    console.log("les categories sont dans pages.html : " + this.categories)
   }
 
   public changeCategory(event) {

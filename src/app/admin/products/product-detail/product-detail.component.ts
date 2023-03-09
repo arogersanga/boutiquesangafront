@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
   public config: SwiperConfigInterface = {};
   public product: Product =  new Product(0, '', [0], 0, 0, 0, 0
-  , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
+  , 0, '', 0, 0, [''], [''], 0, 0, [0]); 
   public image: any;
   public zoomImage: any;
   public form: FormGroup;
@@ -70,7 +70,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   public getProductById(id: any) {
     this.appService.getProductById(id).subscribe(next=> {
       let product: Product =  new Product(0, '', [0], 0, 0, 0, 0
-      , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
+      , 0, '', 0, 0, [''], [''], 0, 0, [0]); 
       if (next) {
         product = next;
         console.log(product.imagesIds.toString() + 'produits dans product detail');

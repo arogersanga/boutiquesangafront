@@ -24,12 +24,12 @@
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Category</mat-label>
-                                <mat-select formControlName="categoryIds" multiple required>
+                                <mat-select formControlName="categoryId" required>
                                     <mat-option *ngFor="let cat of categories" [value]="cat.id">
                                         <span>{{cat.name}}</span>
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="form.controls.categoryIds.errors?.required">Category is required</mat-error>
+                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Category is required</mat-error>
                             </mat-form-field>
                         </div>
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">

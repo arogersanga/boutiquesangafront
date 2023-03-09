@@ -28,7 +28,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private sub: any;
   public id: any;
   public product: Product =  new Product(0, '', [0], 0, 0, 0, 0
-  , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
+  , 0, '', 0, 0, [''], [''], 0, 0, [0]); 
 
   constructor(public appService: AppService, 
     public formBuilder: FormBuilder, 
@@ -48,7 +48,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
       color: null,
       size: null,
       weight: null,
-      categoryIds: [null, Validators.required],
+      categoryId: [null, Validators.required],
       affichageIds: [null, Validators.required],
       id: null
     });
@@ -109,7 +109,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   public getProductById() {
     this.appService.getProductById(this.id).subscribe(myObjectFound => {
       const product: Product =  new Product(0, '', [0], 0, 0, 0, 0
-      , 0, '', 0, 0, [''], [''], 0, [0], [0]); 
+      , 0, '', 0, 0, [''], [''], 0, 0, [0]); 
       product.name = myObjectFound.name;
       product.id = myObjectFound.id;
       if (myObjectFound.imagesIds.arrayValue) {
@@ -129,7 +129,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
       // product.color = myObjectFound.color.arrayValue;
       // product.size = myObjectFound.size.arrayValue;
       product.weight = myObjectFound.weight;
-      product.categoryIds = myObjectFound.categoryId;
+      product.categoryId = myObjectFound.categoryId;
       product.affichageIds= myObjectFound.affichageId;
       product.id = myObjectFound.id;
       this.form.patchValue(product);

@@ -35,12 +35,13 @@ export class AppService {
   imagesList: Image[] = [];
   productsListMap: Map<number, Product> = new Map();
   affichagesParProduit = new AffichagesParProduit(0, [0], 0);
-  categoriesParProduit = new CategoriesParProduit(0, [0], 0);
+  categoriesParProduit = new CategoriesParProduit(0, 0, 0);
   imagesParProduit = new ImagesParProduits(0, [0], 0);
   imagesDunProduit = new ImagesProduits(0, [''], 0);
   product: Product  =  new Product(0, '', [0], 0, 0, 0, 0
-  , 0, '', 0, 0, [''], [''], 0, [0], [0]);
+  , 0, '', 0, 0, [''], [''], 0, 0, [0]);
   i: number = 0; 
+  public categories: Category[] = [];
 affichageRecherche: any;
   public Data = new Data(
     [], // categories
@@ -147,12 +148,21 @@ affichageRecherche: any;
     return produitsParAffichage;
   }
 
-  public getProducts(affichageName: String): Observable<Product[]> {
+  public getProductsByAffichageName(affichageName: String): Observable<Product[]> {
     this.affichageRecherche = this.getAffichageByName(affichageName);
     return this.http.get<Product[]>(this.urlREST + 'products' + '?affichageId=' + this.affichageRecherche.id);
   }
 
-  public getAllProducts(): Observable<any>{        
+  public getProducts(affichageName: String): Observable<Product[]> {
+    this.affichageRecherche = this.getAffichageByName(affichageName);
+    return this.http.get<Product[]>(this.urlREST + 'products' + '?affichageId=' + this.affichageRecherche.id);
+  }
+  
+  public getProductsByCategoryName(categoryName: String): Observable<any> {
+    return this.http.get<any>(this.urlREST + 'products/productsByCategoryName/' + categoryName);
+  }
+
+  public getAllProducts(): Observable<any>{     
     return this.http.get<any>(this.urlREST + 'products');
   }
 
@@ -195,8 +205,6 @@ affichageRecherche: any;
       // console.log(slide.id + ' : slide a suprimer');
       this.http.delete<Slides>(this.urlREST + 'slideses/' + slide.id).subscribe(
         next => {
-          // console.log(next + ' slide a été suprimé');
-      
         });  
   }
 
@@ -250,18 +258,8 @@ affichageRecherche: any;
     this.assignProduct(product);
     this.i = images.length;
     images.forEach(img => {
-       // if (i === images.length - 1) {
           this.uploadFile(this.product, img.file, this.i).then(() => {
-        
-            console.log('imagesIds = ' + this.imagesIds);
-           // this.addProductAfterUpload(this.product);
         });
-        //   i++;
-        // } 
-        // if (i < images.length - 1) {
-        //   this.uploadFile(this.product, img.file, i);
-     //     i++;
-       // }  
     });
   }
 
@@ -278,7 +276,7 @@ affichageRecherche: any;
   this.product.color = product.color;
   this.product.size = product.size;
   this.product.weight = product.weight;
-  this.product.categoryIds = product.categoryIds;
+  this.product.categoryId = product.categoryId;
   this.product.affichageIds= product.affichageIds;
   }
 
@@ -295,7 +293,7 @@ affichageRecherche: any;
       .subscribe(affichagesParProduit => {
          console.log('affich par produits : ' + affichagesParProduit);
       });
-      this.categoriesParProduit.categoryIds = prod.categoryIds;
+      this.categoriesParProduit.categoryId = prod.categoryId;
       this.categoriesParProduit.productId = prod.id;
       this.http.post<CategoriesParProduit>(this.urlREST + 'categoriesParProduits', this.categoriesParProduit)
       .subscribe(categoriesParProduit => {

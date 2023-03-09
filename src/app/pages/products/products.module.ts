@@ -10,11 +10,15 @@ import { ProductsComponent } from './products.component';
 import { ProductComponent } from './product/product.component';
 import { ProductZoomComponent } from './product/product-zoom/product-zoom.component';
 import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
-import { products } from 'src/app/admin/dashboard/dashboard.data';
 
 export const routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full'},
+  { path: ':id', component: ProductsComponent},
+  { path: ':id/:id', component: ProductsComponent},  
   { path: ':name', component: ProductsComponent},
+  { path: 'categoryName/:name', component: ProductComponent},
+  { path: ':categoryName', component: ProductsComponent},
+  { path: ':parentCategoryName/:categoryName', component: ProductsComponent},
   { path: 'product/:name', component: ProductComponent },
   { path: ':id/:name', component: ProductComponent }
  ];

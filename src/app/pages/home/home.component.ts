@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit{
     this.datas = [];
     let categorie = this.categories?.filter(item=>item.name.includes(categorieName))[0];
     if (categorie) {
-       this.datas = this.products?.filter(item=>item.categoryIds.includes(categorie.id));
+       this.datas = this.products?.filter(item=>item.categoryId == categorie.id);
     }
     if (!categorie) {
         this.datas = this.products;

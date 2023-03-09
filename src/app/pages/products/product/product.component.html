@@ -29,7 +29,7 @@
 
         <h2>{{product?.name}}</h2>
         <div class="py-1 lh">
-            <p><span class="text-muted fw-500">Category: </span><span>{{ (categories | filterById : product?.categoryIds[0])?.name  }}</span></p>
+            <p><span class="text-muted fw-500">Category: </span><span>{{ (categories | filterById : product?.categoryId)?.name  }}</span></p>
             <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product?.availibilityCount > 0) ? 'En stock':'Indisponible'}}</span></p>
         </div>
         <div class="py-1">
