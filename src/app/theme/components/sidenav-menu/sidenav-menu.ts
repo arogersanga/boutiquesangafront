@@ -7,7 +7,7 @@ export const sidenavMenuItems = [
   new SidenavMenu(12, 'Bracelets', '/products/bracelets', null, null, true, 2),
   new SidenavMenu(14, 'Portes clés', '/products/portescles', null, null, true, 2),
   new SidenavMenu(20, 'Gros Bracelets', '/products/grosbracelets', null, null, false, 12),
-  new SidenavMenu(21, 'Petits Bracelets', '/products/bracelets', null, null, false, 12),
+  new SidenavMenu(21, 'Petits Bracelets', '/products/petitsbracelets', null, null, false, 12),
   new SidenavMenu(22, 'Portes clés Personnalisés', '/products/portesclespersonnalises', null, null, false, 14),
   new SidenavMenu(23, 'Autres Portes clés', '/products/porteclesnonpersonnalises', null, null, false, 14),
   new SidenavMenu(24, 'Afrique Map', '/products/afriquemap', null, null, false, 11),
