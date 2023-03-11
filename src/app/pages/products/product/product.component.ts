@@ -37,8 +37,13 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
 
   ngOnInit() {
     this.activatedRouteName = this.activatedRoute.snapshot.paramMap.get('name');
+    let activatedRouteId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if (this.activatedRouteName) {
-      this.getProductById(this.activatedRouteName);
+      this.getProductByName(this.activatedRouteName);
+    }
+
+    if (activatedRouteId) {
+      this.getProductById(activatedRouteId);
     }
 
     this.form = this.formBuilder.group({
@@ -72,9 +77,20 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
         }
       }
     };
+    this.getImages();
   }
 
-  public getProductById(id) {
+  public getProductByName(name: string) {
+    this.appService.getProductByName(name).subscribe(next => {
+      if (next) {
+        this.product = next;
+      }
+      
+    });
+    return this.product;
+  }
+
+  public getProductById(id: number) {
     this.appService.getProductById(id).subscribe(next => {
       if (next) {
         this.product = next;

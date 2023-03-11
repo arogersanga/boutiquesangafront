@@ -380,6 +380,10 @@ affichageRecherche: any;
     return this.http.get<any>(this.urlREST + 'products/' + productId);
   }
 
+  public getProductByName(name: string): Observable<any> {
+    return this.http.get<any>(this.urlREST + 'products/productsByProductName/' + name);
+  }
+
   public getBanners(index: number): Observable<any> {
     return this.http.get<any>(this.urlREST + 'slideses/'+ index);
   }

@@ -1,5 +1,5 @@
 <mat-toolbar class="top-navbar mat-elevation-z2" fxLayoutAlign="center center">
-    <a mat-button [routerLink]="['']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">{{ 'NAV.HOME' | translate }}</a>
+    <a mat-button [routerLink]="['/']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">{{ 'NAV.HOME' | translate }}</a>
     <a mat-button [matMenuTriggerFor]="menuHommes" (click)="openMegaMenu()">{{'NAV.PRODUITSPARCATEGORIES' | translate }}</a>
     <mat-menu #menuHommes="matMenu" [overlapTrigger]="false" class="mega-menu app-dropdown">
         <div fxLayout="row wrap">
@@ -47,7 +47,7 @@
             </div>
         </div>
     </mat-menu>
-    <a mat-button [routerLink]="['./products', '']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" (click)="addCategoryRoute('products')">{{ 'NAV.ALL_PRODUCTS' | translate }}</a>
-    <a mat-button [routerLink]="['./contact']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">CONTACT</a>
+    <a mat-button [routerLink]="['/products', '']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}" (click)="addCategoryRoute('products')">{{ 'NAV.ALL_PRODUCTS' | translate }}</a>
+    <a mat-button [routerLink]="['/contact']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">CONTACT</a>
     <!-- <a mat-button [routerLink]="['admin']" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">ADMIN</a> -->
 </mat-toolbar>

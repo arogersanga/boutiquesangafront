@@ -12,7 +12,7 @@ export class Settings {
 @Injectable()
 export class AppSettings {
     public settings = new Settings(
-        'BOUTIQUE',  // theme name
+        'Produits corne',  // theme name
         'grey',     // green, blue, red, pink, purple, grey
         false,       // true = rtl, false = ltr
         true,        // adminSidenavIsOpened

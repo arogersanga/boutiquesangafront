@@ -12,15 +12,10 @@ import { ProductZoomComponent } from './product/product-zoom/product-zoom.compon
 import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 
 export const routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'full'},
-  { path: ':id', component: ProductsComponent},
-  { path: ':id/:id', component: ProductsComponent},  
-  { path: ':name', component: ProductsComponent},
-  { path: 'categoryName/:name', component: ProductComponent},
-  { path: ':categoryName', component: ProductsComponent},
-  { path: ':parentCategoryName/:categoryName', component: ProductsComponent},
-  { path: 'product/:name', component: ProductComponent },
-  { path: ':id/:name', component: ProductComponent }
+  { path: '', component: ProductsComponent, pathMatch: 'full' },
+  { path: ':name', component: ProductsComponent },
+  { path: ':id/:name', component: ProductComponent },
+  { path: 'product/:id', component: ProductComponent }
  ];
 
 @NgModule({

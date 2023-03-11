@@ -110,8 +110,10 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     
     this.activatedRoute.url.subscribe(url => {
       console.log(url.toString() + 'dans products.ts 2222 categoryRoute');
-      if (url.toString()) {
+      if (url.toString() && url.toString().length > 0) {
         this.getProductsByActivatedRoute(url.toString());
+      } else {
+        this.getAllProducts();
       }
     });
     this.getCategories();
@@ -150,15 +152,6 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    /* console.log(this.activatedRoute.url.toString() + 'dans products.ts 2222::::::: categoryRoute');
-    this.getAllProducts();
-    this.activatedRoute.url.subscribe(url => {
-      console.log(url.toString() + 'dans ngafter products.ts 222211111 categoryRoute');
-      if (url.toString()) {
-        this.getProductsByActivatedRoute(url.toString());
-      } 
-    });
-     */
     this.getImages();
   }
 8
