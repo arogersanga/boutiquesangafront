@@ -95,14 +95,17 @@ export class HomeComponent implements OnInit{
 
   public getProduitsParAffichages(typeAffichage: string) {
     let data: Product[] = [];
-    let affichage = this.affichages?.filter(item=>item.name.includes(typeAffichage))[0];
-   if (affichage) {
-      data = this.products?.filter(item=>item.affichageIds.includes(affichage.id));
-      console.log(data + ' produits par affichage trouvés dans le service');
-   } else {
-    data = this.products;
-   }
-
+    this.appService.getAffichageByName(typeAffichage).subscribe(affichage => {
+      if (affichage) {
+        data = this.products?.filter(item=>item.affichageIds.includes(affichage.id));
+        console.log(data + ' produits par affichage trouvés dans le service');
+     } else {
+      data = this.products;
+     }
+  
+    });
+    // let affichage = this.affichages?.filter(item=>item.name.includes(typeAffichage))[0];
+   
    if (data) {
         if (typeAffichage.trim().toLowerCase() === 'featured') {  
              console.log(data + ' featured produit trouvés ');

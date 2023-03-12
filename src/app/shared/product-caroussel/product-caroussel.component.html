@@ -2,20 +2,20 @@
     <div class="swiper-wrapper h-100">
         <div *ngFor="let product of products" class="swiper-slide">
             <mat-card class="product-item">
-                <mat-chip-list *ngIf="product.discount">
-                    <mat-chip color="warn" selected="true">{{product.discount}}% OFF</mat-chip>
+                <mat-chip-list *ngIf="product?.discount">
+                    <mat-chip color="warn" selected="true">{{product?.discount}}% DE REDUCTION</mat-chip>
                 </mat-chip-list>
-                <a [routerLink]="['/products', product.id, product.id]" class="image-link">
-                    <img [src]="( images | filterById : product.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0])?.value2" class="swiper-lazy" />
+                <a [routerLink]="['/products', product?.id, product?.id]" class="image-link">
+                    <img [src]="( images | filterById : product?.imagesIds[0] )?.value1 + ( images | filterById : product.imagesIds[0])?.value2" class="swiper-lazy" />
                     <div class="swiper-lazy-preloader"></div>
                 </a>
-                <h4 class="category text-muted">{{ ( appService.Data.categories | filterById : product.categoryId )?.name }}</h4>
-                <a [routerLink]="['/products', product.id, product.id]" class="title text-truncate">
+                <h4 class="category text-muted">{{ ( categories | filterById : product.categoryId )?.name }}</h4>
+                <a [routerLink]="['/products', product?.id, product?.id]" class="title text-truncate">
           {{product.name}}
         </a>
                 <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
                     <div fxLayout="column" fxLayoutAlign="center start">
-                        <p class="old-price text-muted"><span *ngIf="product.oldPrice">{{product.oldPrice | number : '1.2-2'}}€</span></p>
+                        <p class="old-price text-muted"><span *ngIf="product?.oldPrice">{{product.oldPrice | number : '1.2-2'}}€</span></p>
                         <p class="new-price">{{product.newPrice | number : '1.2-2'}}€</p>
                     </div>
                     <app-rating [ratingsCount]="product.ratingsCount" [ratingsValue]="product.ratingsValue" [direction]="'column'"></app-rating>

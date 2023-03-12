@@ -18,8 +18,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { ProductDialogComponent } from '../../shared/product-caroussel/product-dialog/product-dialog.component';
 import { AlertService } from '../../alert-service.service';
 import { Subscription } from 'rxjs';
-import { ProductZoomComponent } from './product/product-zoom/product-zoom.component';
-import { ProductDetailComponent } from 'src/app/admin/products/product-detail/product-detail.component';
 
 @Component({
   selector: 'app-products',
@@ -145,23 +143,30 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.appService.getProductsByCategoryName(url).subscribe(next => {
       if (next){
         this.products = next;
-        console.log(this.products + ' dans onInit 4444 productsComponent10222222');
-      }      
+      }
     });
     return this.products;
   }
 
   ngAfterViewInit() {
+    this.activatedRoute.url.subscribe(url => {
+      console.log(url.toString() + 'dans products.ts 2222 categoryRoute');
+      if (url.toString() && url.toString().length > 0) {
+        this.getProductsByActivatedRoute(url.toString());
+      } else {
+        this.getAllProducts();
+      }
+    });
+    this.getCategories();
     this.getImages();
   }
-8
+  
   public getImages() {
     this.appService.getImages()
       .subscribe(next => {
 
         if (next) {
           this.images = next._embedded.images;
-          // console.log(this.images + 'images list');
         }
       },
         error => {

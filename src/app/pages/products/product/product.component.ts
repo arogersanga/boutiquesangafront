@@ -20,10 +20,9 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
   public config: SwiperConfigInterface = {};
   public product: Product;
-  public image: any;
-  public images: Array<Image>;
+  public image: Image;
+  public images: Image[] = [];
   public zoomImage: any;
-  private sub: any;
   public form: FormGroup;
   public relatedProducts: Array<Product>;
   private emailValidator: any;
@@ -32,20 +31,22 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   public affichages: Affichage[] = [];
   public categories: Category[] = [];
   public activatedRouteName: string;
+  public activatedRouteId: number;
 
   constructor(public appService: AppService, private alertService: AlertService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public formBuilder: FormBuilder) {  }
 
   ngOnInit() {
+     this.activatedRoute.url.subscribe(url => {
     this.activatedRouteName = this.activatedRoute.snapshot.paramMap.get('name');
-    let activatedRouteId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.activatedRouteId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if (this.activatedRouteName) {
       this.getProductByName(this.activatedRouteName);
     }
 
-    if (activatedRouteId) {
-      this.getProductById(activatedRouteId);
+    if (this.activatedRouteId) {
+      this.getProductById(this.activatedRouteId);
     }
-
+  });
     this.form = this.formBuilder.group({
       review: [null, Validators.required],
       name: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -77,13 +78,14 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
         }
       }
     };
-    this.getImages();
   }
 
   public getProductByName(name: string) {
+    this.getImages();
     this.appService.getProductByName(name).subscribe(next => {
       if (next) {
         this.product = next;
+        console.log('j y passe et product by name images array : ' + this.product.imagesIds[1]);
       }
       
     });
@@ -91,9 +93,11 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   }
 
   public getProductById(id: number) {
+    this.getImages();
     this.appService.getProductById(id).subscribe(next => {
       if (next) {
         this.product = next;
+        console.log('j y passe et product images array : ' + this.product.imagesIds.toString());
       }
       
     });
@@ -143,7 +147,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
     });
   }
 
-  public selectImage(image) {
+  public selectImage(image: Image) {
     this.image = image;
     this.zoomImage = image;
   }
@@ -167,12 +171,11 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   }
 
   ngDoCheck() {
-    this.activatedRouteName = this.activatedRoute.snapshot.paramMap.get('name');
-    if (this.activatedRouteName) {
-      if (!this.categories) {
-        this.getCategories();
+    this.activatedRoute.url.subscribe(url => {
+      if(this.images.length == 0) {
+        this.getImages();
       }
-    }
+    });
   }
 
   public onMouseLeave(event) {
@@ -187,7 +190,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    //this.sub.unsubscribe();
   }
 
   public onSubmit() {

@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter, DoCheck, OnInit} from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import {Category} from '../../app.models';
 
 @Component({
@@ -13,21 +14,15 @@ export class CategoryListComponent implements DoCheck, OnInit {
   @Output() change: EventEmitter<any> = new EventEmitter();
   mainCategories: Category[];
   cats: Category[] = [];
-  constructor() {}
+  constructor(public appService: AppService) {}
 
   public ngOnInit() {
-    this.cats = this.categories
+    this.getCategories();
+    
     console.log("les categories sont : " + this.categories)
   }
   public ngDoCheck() {
-    if (this.cats && !this.mainCategories) {
-      this.cats.forEach( category => {
-        if ((category as Category).parentId.toString().match(this.categoryParentId)) {
-           this.mainCategories.unshift((category as Category));
-           console.log((category as Category) + ' les maincategories 5');
-         }
-      });
-    }
+   
   }
 
   public stopClickPropagate(event: any) {
@@ -40,5 +35,19 @@ export class CategoryListComponent implements DoCheck, OnInit {
   public changeCategory(event) {
     this.change.emit(event);
   }
-
+  public getCategories() {
+    this.appService.getCategories().subscribe(next => {
+      if (next) {
+        let categs = next._embedded.categories;
+          categs.forEach( category => {
+            if (category.parentId == 0) {
+               this.cats.unshift(category);
+               console.log(this.cats + ' les cats');
+             }
+          });
+        
+        console.log(this.cats + ' dans getAllCategories categorylistComponent')
+      }
+    });
+  }
 }

@@ -62,7 +62,7 @@ export class ImagesProduits {
 export class Product {
   constructor(public id: number,
               public name: string,
-              public imagesIds: Array<number>,
+              public imagesIds: Array<any>,
               public oldPrice: number,
               public newPrice: number,
               public discount: number,

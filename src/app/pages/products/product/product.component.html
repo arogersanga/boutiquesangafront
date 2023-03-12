@@ -8,9 +8,9 @@
         <div class="small-carousel">
             <div class="swiper-container" [swiper]="config">
                 <div class="swiper-wrapper">
-                    <div *ngFor="let imag of product.imagesIds" class="swiper-slide">
+                    <div *ngFor="let imag of product?.imagesIds" class="swiper-slide">
                         <mat-card (click)="selectImage(imag)" class="p-1">
-                            <img [attr.data-src]="(images | filterById : imag )?.value1 + ( images | filterById : imag )?.value2" class="swiper-lazy" />
+                            <img [src]="(images | filterById : imag )?.value1 + ( images | filterById : imag )?.value2" class="swiper-lazy" />
                             <div class="swiper-lazy-preloader"></div>
                         </mat-card>
                     </div>
@@ -70,7 +70,7 @@
                     <mat-icon class="mat-icon-xlg text-muted m-0">card_giftcard</mat-icon>
                     <div class="content">
                         <p>BONUS PLUS</p>
-                        <span class="text-muted m-0">Make fun of shopping and collect bonuses</span>
+                        <span class="text-muted m-0">Soyez content de faire du shopping</span>
                     </div>
                 </mat-card>
             </div>
@@ -78,8 +78,8 @@
                 <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon class="mat-icon-xlg text-muted m-0">local_shipping</mat-icon>
                     <div class="content">
-                        <p>FREE SHIPPING</p>
-                        <span class="text-muted m-0">Free shipping on all orders over €99</span>
+                        <p>Pas de frais de port</p>
+                        <span class="text-muted m-0">Pas de frais de port pour toute commande plus de 99€</span>
                     </div>
                 </mat-card>
             </div>
@@ -88,7 +88,7 @@
                     <mat-icon class="mat-icon-xlg text-muted m-0">€</mat-icon>
                     <div class="content">
                         <p>RETOUR GUARANTIE</p>
-                        <span class="text-muted m-0">30 Days money return guarantee</span>
+                        <span class="text-muted m-0">30 jours pour changer d'avis garantie</span>
                     </div>
                 </mat-card>
             </div>
@@ -97,7 +97,7 @@
                     <mat-icon class="mat-icon-xlg text-muted m-0">history</mat-icon>
                     <div class="content">
                         <p>SUPPORT EN LIGNE 24/7</p>
-                        <span class="text-muted m-0">Appelez nous au (+33) 6 00 00 00 00</span>
+                        <span class="text-muted m-0">Appelez nous au (+33) 6 95 77 89 09</span>
                     </div>
                 </mat-card>
             </div>
@@ -111,7 +111,7 @@
             <mat-tab-group [@.disabled]="true" [selectedIndex]="0">
                 <mat-tab label="Description">
                     <div class="full-desc lh">
-                        <p>{{ product.description }}</p>
+                        <p>{{ product?.description }}</p>
                     </div>
                 </mat-tab>
                 <mat-tab label="Avis">
