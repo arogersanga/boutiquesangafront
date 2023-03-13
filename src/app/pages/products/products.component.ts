@@ -157,8 +157,6 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.getAllProducts();
       }
     });
-    this.getCategories();
-    this.getImages();
   }
   
   public getImages() {

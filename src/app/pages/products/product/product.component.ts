@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
   public config: SwiperConfigInterface = {};
   public product: Product;
-  public image: Image;
+  public image: any;
   public images: Image[] = [];
   public zoomImage: any;
   public form: FormGroup;
@@ -32,10 +32,11 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   public categories: Category[] = [];
   public activatedRouteName: string;
   public activatedRouteId: number;
-
+  public times: number =0;
   constructor(public appService: AppService, private alertService: AlertService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public formBuilder: FormBuilder) {  }
 
   ngOnInit() {
+    
      this.activatedRoute.url.subscribe(url => {
     this.activatedRouteName = this.activatedRoute.snapshot.paramMap.get('name');
     this.activatedRouteId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -52,7 +53,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
       name: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
       email: [null, Validators.compose([Validators.required, this.emailValidator])]
     });
-    this.getRelatedProducts();
+    // this.getRelatedProducts();
     this.getCategories();
     this.getAffichages();
     this.getImages();
@@ -81,7 +82,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   }
 
   public getProductByName(name: string) {
-    this.getImages();
+  
     this.appService.getProductByName(name).subscribe(next => {
       if (next) {
         this.product = next;
@@ -93,7 +94,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   }
 
   public getProductById(id: number) {
-    this.getImages();
+
     this.appService.getProductById(id).subscribe(next => {
       if (next) {
         this.product = next;
@@ -147,7 +148,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
     });
   }
 
-  public selectImage(image: Image) {
+  public selectImage(image:any) {
     this.image = image;
     this.zoomImage = image;
   }
@@ -171,11 +172,8 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
   }
 
   ngDoCheck() {
-    this.activatedRoute.url.subscribe(url => {
-      if(this.images.length == 0) {
-        this.getImages();
-      }
-    });
+  
+    
   }
 
   public onMouseLeave(event) {
