@@ -43,7 +43,7 @@ export class BannersDetailsComponent implements OnInit {
    
         if (next) {
           this.affichages = next._embedded.affichages;
-          console.log(this.affichages + 'affich list');
+         //  console.log(this.affichages + 'affich list');
         }
         },
         error => {
@@ -69,7 +69,7 @@ export class BannersDetailsComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.form.value);
+   //  console.log(this.form.value);
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
     }

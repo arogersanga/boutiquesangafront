@@ -31,12 +31,12 @@ export class AffichageComponent implements OnInit, OnDestroy {
   public getAffichages() {
   this.appService.getAffichages()
       .subscribe(next => {
-        console.log(next);
+       //  console.log(next);
         const affichages = next;
         if (next) {
           this.affichages = next._embedded.affichages;
         }
-        console.log(this.affichages);
+       //  console.log(this.affichages);
         },
         error => {
           this.handleError(error);
@@ -70,7 +70,7 @@ export class AffichageComponent implements OnInit, OnDestroy {
           this.affichage.name = affichage.name;
           this.affichages.unshift(this.affichage);
           this.appService.addAffichage(this.affichage);
-          console.log(this.affichage);
+         //  console.log(this.affichage);
         }
       }
     });

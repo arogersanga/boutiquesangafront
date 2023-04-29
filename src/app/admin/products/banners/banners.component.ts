@@ -35,12 +35,12 @@ export class BannersComponent implements OnInit {
   public getBanners() {
     this.appService.getAllBanners()
         .subscribe(next => {
-          console.log(next + ' banners');
+         //  console.log(next + ' banners');
 
           if (next) {
             this.banners = next._embedded.bannerses;
           }
-          // console.log(this.banners + ' banners after assignment');
+          ////  console.log(this.banners + ' banners after assignment');
           },
           error => {
             this.handleError(error);
@@ -55,7 +55,7 @@ export class BannersComponent implements OnInit {
           if (next) {
             this.affichages = next._embedded.affichages;
           }
-          // console.log(this.affichages + ' affichages after assignment');
+          ////  console.log(this.affichages + ' affichages after assignment');
           },
           error => {
             this.handleError(error);
@@ -102,7 +102,7 @@ export class BannersComponent implements OnInit {
             this.banner.productId = banner.productId;
             this.banner.subtitle = banner.subtitle;
             this.banner.title = banner.title;
-            // console.log(this.banner.productId + '  mon banner ');
+            ////  console.log(this.banner.productId + '  mon banner ');
             this.banners.unshift(this.banner);
             this.appService.addBanners(this.banner);
             

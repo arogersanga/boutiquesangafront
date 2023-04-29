@@ -37,8 +37,8 @@ export class MenuComponent implements OnInit {
     });
   }
   addCategoryRoute(categoryName: string){
-    console.log(this.activatedRoute.snapshot.paramMap.get('categoryName') + 'dans menu.ts activatedRoute');
-    console.log(categoryName + 'dans menu.ts activatedRoute2');
+   //  console.log(this.activatedRoute.snapshot.paramMap.get('categoryName') + 'dans menu.ts activatedRoute');
+   //  console.log(categoryName + 'dans menu.ts activatedRoute2');
      
     this.activatedRouteName.emit(categoryName);
   }

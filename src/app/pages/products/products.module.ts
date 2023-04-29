@@ -15,7 +15,8 @@ export const routes = [
   { path: '', component: ProductsComponent, pathMatch: 'full' },
   { path: ':name', component: ProductsComponent },
   { path: ':id/:name', component: ProductComponent },
-  { path: 'product/:id', component: ProductComponent }
+  { path: 'product/:id', component: ProductComponent },
+  { path: 'prods/productsListByLikeName/:labelSearch', component: ProductsComponent }
  ];
 
 @NgModule({

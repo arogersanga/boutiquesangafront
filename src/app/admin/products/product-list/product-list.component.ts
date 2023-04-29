@@ -45,7 +45,7 @@ export class ProductListComponent implements OnInit, DoCheck, AfterViewInit {
     .subscribe(next => {
           if (next) {
             this.categories = next._embedded.categories;
-            console.log(this.categories + 'categories list');
+           //  console.log(this.categories + 'categories list');
           }
       },
       error => {
@@ -72,7 +72,7 @@ export class ProductListComponent implements OnInit, DoCheck, AfterViewInit {
    
         if (next) {
           this.affichages = next._embedded.affichages;
-          console.log(this.affichages + 'affich list');
+         //  console.log(this.affichages + 'affich list');
         }
         },
         error => {

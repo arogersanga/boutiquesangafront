@@ -65,8 +65,10 @@ export class MainCarousselComponent implements OnInit, AfterViewInit {
     this.appService.getAllProducts().subscribe(next => {
       if (next) {
         this.products = next._embedded.products;
+       // console.log(this.products + ' dans main carroussel');
       }
       });
+      
   }
 
 }

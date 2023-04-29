@@ -82,7 +82,7 @@ affichageRecherche: any;
   }
 
   emitProductsListSubject() {
-    console.log('je passe dans productSubject ' + this.productsList);
+ // console.log('je passe dans productSubject ' + this.productsList);
     if (this.productsList) {
       this.productsListSubject.next(this.productsList);
     }
@@ -109,6 +109,11 @@ affichageRecherche: any;
   }
 
   public getAffichagesList(): Affichage[] {
+    this.getAffichages().subscribe( affs => {
+      if (affs) {
+        this.affichagesList = affs._embedded.affichages;
+      }
+    });
     return this.affichagesList;
   }
 
@@ -135,17 +140,32 @@ affichageRecherche: any;
   }
  
   getAffichageByName(name: String): Observable<Affichage> {
-    return this.http.get<Affichage>(this.urlREST + 'affichages' + '?name=' + name);
+    return this.http.get<Affichage>(this.urlREST + 'affichages/affichageByAffichageName/' + name);
   }
 
   public getProductsByAffichage(affichageNme: String): Product[]{
-     let affichage = this.Data.affichageList?.filter(item=>item.name == affichageNme)[0];
-    let produitsParAffichage: Product[] = [];
+     let affichage: Affichage;
+     let produitsParAffichage: Product[] = [];
+     this.getAffichageByName(affichageNme).subscribe(aff => {
+        if (aff) {
+          affichage =  aff;
+          
     if (affichage) {
-       produitsParAffichage = this.productsList?.filter(item=>item.affichageIds.includes(affichage.id));
+      this.productsList.forEach(item=> {
+        item.affichageIds.forEach(element => {
+        if (element == affichage.id){
+          produitsParAffichage.push(item);
+        }
+       });
+      });
+    
+      return produitsParAffichage;
     }
     
-    return produitsParAffichage;
+        }
+     });
+    
+    return [];
   }
 
   public getProductsByAffichageName(affichageName: String): Observable<Product[]> {
@@ -162,8 +182,17 @@ affichageRecherche: any;
     return this.http.get<any>(this.urlREST + 'products/productsByCategoryName/' + categoryName);
   }
 
-  public getAllProducts(): Observable<any>{     
+  public getAllProducts(): Observable<any>{ 
+    this.http.get<any>(this.urlREST + 'products').subscribe(prods => {
+      if (prods) {
+        this.productsList = prods._embedded.products;
+      }
+    })    
     return this.http.get<any>(this.urlREST + 'products');
+  }
+
+  public getProductsByLikeName(likeName: String) {
+    return this.http.get<any>(this.urlREST + 'products/productsListByLikeName/' + likeName);
   }
 
   public getAllImages(): Observable<any>{        
@@ -186,13 +215,13 @@ affichageRecherche: any;
             slid.subtitle = slide.subtitle;
             slid.affichageId = slide.affichageId;
             slid.productId = slide.productId;
-            console.log(slid + ' dans le service les slides');
+         // console.log(slid + ' dans le service les slides');
             this.slides.unshift(slid);
           });  
         }
         this.emitSlidesSubject();
       }
-      console.log(this.slides + ' slides after assignment');
+   // console.log(this.slides + ' slides after assignment');
       },
       error => {
         this.handleError(error);
@@ -230,7 +259,7 @@ affichageRecherche: any;
   }
 
   removeBanners(banner: any) {
-    console.log(banner.id + ' : banner a suprimer');
+ // console.log(banner.id + ' : banner a suprimer');
     this.http.delete<Banners>(this.urlREST + 'bannerses/' + banner.id).subscribe(
       next => {
         // console.log(' banner a été suprimé');
@@ -284,14 +313,14 @@ affichageRecherche: any;
     //product.images = [];
     product.imagesIds = imagesIds;
     
-    console.log('2. Les ids images sont : '+ this.imagesIds.toString());
+ // console.log('2. Les ids images sont : '+ this.imagesIds.toString());
     // console.log(product.images.length + '! test length dans add product apres upload');
     this.http.post<Product>(this.urlREST + 'products', product).subscribe(prod => {
       this.affichagesParProduit.affichageIds = prod.affichageIds;
       this.affichagesParProduit.productId = prod.id;
       this.http.post<AffichagesParProduit>(this.urlREST + 'affichagesParProduits', this.affichagesParProduit)
       .subscribe(affichagesParProduit => {
-         console.log('affich par produits : ' + affichagesParProduit);
+      // console.log('affich par produits : ' + affichagesParProduit);
       });
       this.categoriesParProduit.categoryId = prod.categoryId;
       this.categoriesParProduit.productId = prod.id;
@@ -339,10 +368,10 @@ affichageRecherche: any;
     return new Promise(
       (resolve) => {
         const almostUniqueFileName = Date.now().toString();
-        console.log(file , produit + ' avant');
+     // console.log(file , produit + ' avant');
         const upload = firebase.storage().ref()
           .child('images/' + `${almostUniqueFileName + file.name }`).put(file);
-          console.log(file + ' apres');
+       // console.log(file + ' apres');
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
             console.log('Chargement…');
@@ -500,21 +529,7 @@ affichageRecherche: any;
   }
 
   public getBrands() {
-    return [
-      {name: 'aloha', image: 'assets/images/brands/aloha.png'},
-      {name: 'dream', image: 'assets/images/brands/dream.png'},
-      {name: 'congrats', image: 'assets/images/brands/congrats.png'},
-      {name: 'best', image: 'assets/images/brands/best.png'},
-      {name: 'original', image: 'assets/images/brands/original.png'},
-      {name: 'retro', image: 'assets/images/brands/retro.png'},
-      {name: 'king', image: 'assets/images/brands/king.png'},
-      {name: 'love', image: 'assets/images/brands/love.png'},
-      {name: 'the', image: 'assets/images/brands/the.png'},
-      {name: 'easter', image: 'assets/images/brands/easter.png'},
-      {name: 'with', image: 'assets/images/brands/with.png'},
-      {name: 'special', image: 'assets/images/brands/special.png'},
-      {name: 'bravo', image: 'assets/images/brands/bravo.png'}
-    ];
+    return [];
   }
 
   public getCountries() {

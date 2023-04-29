@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     await this.FirebaseAuth.signup(this.email, this.password);
     if (this.FirebaseAuth.isLoggedIn) {
       this.isSignedIn = true;
-      console.log(this.email);
+     //  console.log(this.email);
       // alert('Compte crée avec succès.');
     }
   }

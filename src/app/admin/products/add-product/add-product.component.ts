@@ -82,12 +82,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
   public getAffichages() {
     this.appService.getAffichages()
       .subscribe(next => {
-        console.log(next);
+       //  console.log(next);
         const affichages = next;
         if (next) {
           this.affichages = next._embedded.affichages;
         }
-        console.log(this.affichages);
+       //  console.log(this.affichages);
         },
         error => {
           this.handleError(error);
@@ -102,7 +102,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         greatestId = produ.id;
       }
     });
-    console.log(greatestId + 'id le plus grand');
+   //  console.log(greatestId + 'id le plus grand');
     return greatestId;
   }
 
@@ -114,7 +114,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
       product.id = myObjectFound.id;
       if (myObjectFound.imagesIds.arrayValue) {
         product.imagesIds[0] = myObjectFound.imagesIds[0];
-        console.log(product.imagesIds[0] + ' lien premier image');
+       //  console.log(product.imagesIds[0] + ' lien premier image');
       } else {
         product.imagesIds = myObjectFound.imagesIds;
       }
@@ -149,20 +149,20 @@ export class AddProductComponent implements OnInit, OnDestroy {
           this.product.size[k] = myObjectFound.size[k];
         }
       }
-      console.log(this.product + ' à la fin de get');
+     //  console.log(this.product + ' à la fin de get');
       this.form.controls.images.setValue(this.product.imagesIds);
     });
   }
 
   public onSubmit() {
-    console.log(this.product + ' product value');
+   //  console.log(this.product + ' product value');
     if (this.form.valid) {
       this.product = this.form.value;
       this.images = this.form.value.images;
       if (this.product) {
         const index: number = this.products.findIndex(x => x.id === this.product.id);
         if (index === -1) {
-          console.log(this.product);
+         //  console.log(this.product);
           this.appService.addProduct(this.product, this.images);
         }
       }

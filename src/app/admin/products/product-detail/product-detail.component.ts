@@ -73,12 +73,12 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       , 0, '', 0, 0, [''], [''], 0, 0, [0]); 
       if (next) {
         product = next;
-        console.log(product.imagesIds.toString() + 'produits dans product detail');
+       //  console.log(product.imagesIds.toString() + 'produits dans product detail');
       
       
-        //     console.log(product + 'premiers produits');
+        //    //  console.log(product + 'premiers produits');
     
-        // console.log(next + 'chaque produit');
+        ////  console.log(next + 'chaque produit');
        
         //product.name = next.name;
         // product.id = next.id;
@@ -183,7 +183,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   public onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+     //  console.log(this.form.value);
     }
   }
 

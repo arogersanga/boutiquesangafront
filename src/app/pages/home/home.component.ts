@@ -22,20 +22,21 @@ export class HomeComponent implements OnInit{
   { id:0, title: 'The biggest sale', subtitle: 'Special for today', affichageId:0, productId:0 },
   { id:0, title: 'Summer collection', subtitle: 'New Arrivals On Sale', affichageId:0, productId:0 },
   { id:0, title: 'The biggest sale', subtitle: 'Special for today', affichageId:0, productId:0 }];
-  public featuredProducts: Product[];
+  public featuredProducts: Array<Product> = [];
   public onSaleProducts: Array<Product> = [];
   public topRatedProducts: Array<Product> = [];
   public newArrivalsProducts: Array<Product> = [];
-  public affichages: Array<Affichage> = [];
+  public anewArrivalsProductsffichages: Array<Affichage> = [];
   public categories: Array<Category> = [];
   public products: Array<Product> = [];
-  public slides: Slides[] = [{ id:0, title: 'The biggest sale', subtitle: 'Special for today', affichageId:0, productId:0},
-  {id:0,  title: 'Summer collection', subtitle: 'New Arrivals On Sale', affichageId:0, productId:0 },
-  { id:0, title: 'The biggest sale', subtitle: 'Special for today', affichageId:0, productId:0 },
-  { id:0, title: 'Summer collection', subtitle: 'New Arrivals On Sale', affichageId:0, productId:0 },
-  { id:0, title: 'The biggest sale', subtitle: 'Special for today', affichageId:0, productId:0 }];
+  public slides: Slides[] = [];
   slidesSubscription: Subscription;
-  datas: Product[];
+  featuredProductsSubscription: Subscription;
+  newArrivalsProductsSubscription: Subscription;
+  onSaleProductsSubscription: Subscription;
+  topRatedProductsSubscription: Subscription;
+  affichages : Affichage[] = [];
+  datas: Product[] = [];
   constructor(public appService: AppService, private alertService: AlertService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
@@ -43,18 +44,16 @@ export class HomeComponent implements OnInit{
     this.getAllProducts();
     this.appService.getAllSlides();
     this.getAllBanners();
-    
     this.slidesSubscription = this.appService.slidesSubject.subscribe(
       (slides: Slides[]) => {
         this.slides = slides;
-        console.log(this.slides + ' dans oninit')      
+     // console.log(this.slides + ' dans oninit')      
       }
-    );
-    
+    );  
   }
 
   public onLinkClick(e) {
-    this.getProduitsParAffichages(e.tab.textLabel.toLowerCase());
+    this.getProduitsParAffichages(e.tab.textLabel);
   }
 
   public getAllProducts() {
@@ -62,7 +61,6 @@ export class HomeComponent implements OnInit{
     this.appService.getAllProducts().subscribe(next => {
         if (next) {
           this.products = next._embedded.products;
-          this.appService.productsList = this.products;
         }
       });
   }
@@ -92,37 +90,28 @@ export class HomeComponent implements OnInit{
  return id;
     
   }
+ 
 
   public getProduitsParAffichages(typeAffichage: string) {
     let data: Product[] = [];
-    this.appService.getAffichageByName(typeAffichage).subscribe(affichage => {
+     this.appService.getAffichageByName(typeAffichage).subscribe(affichage => {
       if (affichage) {
         data = this.products?.filter(item=>item.affichageIds.includes(affichage.id));
-        console.log(data + ' produits par affichage trouvés dans le service');
-     } else {
-      data = this.products;
-     }
-  
+         if (typeAffichage === "Featured") { 
+           this.featuredProducts = data;
+       }
+       if (typeAffichage === "On Sale") {
+         this.onSaleProducts = data;
+       }
+       if (typeAffichage === "Top Rated") {
+           this.topRatedProducts = data;
+       }
+       if (typeAffichage === "New Arrivals") {
+         this.newArrivalsProducts = data;
+       }         
+      }
     });
-    // let affichage = this.affichages?.filter(item=>item.name.includes(typeAffichage))[0];
-   
-   if (data) {
-        if (typeAffichage.trim().toLowerCase() === 'featured') {  
-             console.log(data + ' featured produit trouvés ');
-               this.featuredProducts = data;
-           }
-           if (typeAffichage.trim().toLowerCase() === 'on sale') {
-             console.log(data + ' featured produit trouvés 2 ');
-             this.onSaleProducts = data;
-           }
-           if (typeAffichage.trim().toLowerCase() === 'top-rated') {
-             console.log(data + ' featured produit trouvés 3');
-               this.topRatedProducts = data;
-           }
-           if (typeAffichage.trim().toLowerCase() === 'new arrivals') {
-             this.newArrivalsProducts = data;
-           }        
-     } 
+  
   }
 
   public getCategories() {
@@ -151,7 +140,7 @@ export class HomeComponent implements OnInit{
   public getAllBanners() {
     this.appService.getAllBanners().subscribe(data=>{
       this.banners = data._embedded.bannerses;
-      console.log(this.banners[2].productId + ' banners dans home.ts');
+   // console.log(this.banners[2].productId + ' banners dans home.ts');
     });
   }
 

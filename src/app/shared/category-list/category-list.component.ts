@@ -19,7 +19,7 @@ export class CategoryListComponent implements DoCheck, OnInit {
   public ngOnInit() {
     this.getCategories();
     
-    console.log("les categories sont : " + this.categories)
+   //  console.log("les categories sont : " + this.categories)
   }
   public ngDoCheck() {
    
@@ -42,11 +42,11 @@ export class CategoryListComponent implements DoCheck, OnInit {
           categs.forEach( category => {
             if (category.parentId == 0) {
                this.cats.unshift(category);
-               console.log(this.cats + ' les cats');
+              //  console.log(this.cats + ' les cats');
              }
           });
         
-        console.log(this.cats + ' dans getAllCategories categorylistComponent')
+       //  console.log(this.cats + ' dans getAllCategories categorylistComponent')
       }
     });
   }

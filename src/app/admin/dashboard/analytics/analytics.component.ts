@@ -31,7 +31,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
+   //  console.log(event);
   }
 
   ngAfterViewChecked() {    

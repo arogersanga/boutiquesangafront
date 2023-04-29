@@ -86,7 +86,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
     this.appService.getProductByName(name).subscribe(next => {
       if (next) {
         this.product = next;
-        console.log('j y passe et product by name images array : ' + this.product.imagesIds[1]);
+       //  console.log('j y passe et product by name images array : ' + this.product.imagesIds[1]);
       }
       
     });
@@ -98,7 +98,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
     this.appService.getProductById(id).subscribe(next => {
       if (next) {
         this.product = next;
-        console.log('j y passe et product images array : ' + this.product.imagesIds.toString());
+       //  console.log('j y passe et product images array : ' + this.product.imagesIds.toString());
       }
       
     });
@@ -193,7 +193,7 @@ export class ProductComponent implements OnInit, AfterViewInit, DoCheck, OnDestr
 
   public onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+     //  console.log(this.form.value);
     }
   }
   handleError(error): void {

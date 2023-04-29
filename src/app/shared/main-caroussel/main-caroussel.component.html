@@ -1,8 +1,8 @@
 <div class="main-slider">
     <div class="swiper-container h-100" [swiper]="config">
         <div class="swiper-wrapper h-100">
-            <div [style.background-image]="'url(' + (images | filterById : (products | filterById : slide.productId)?.imagesIds[0])?.value1 +
-            (images | filterById : (products | filterById : slide.productId)?.imagesIds[0])?.value2 + ')'" *ngFor="let slide of slides" class="swiper-slide">
+            <div [style.background-image]="'url(' + (images | filterById : (products | filterById : slide?.productId)?.imagesIds[0])?.value1 +
+            (images | filterById : (products | filterById : slide?.productId)?.imagesIds[0])?.value2 + ')'" *ngFor="let slide of slides" class="swiper-slide">
                 <div class="slide-item swiper-lazy">
                     <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                     <div class="mask"></div>
@@ -10,11 +10,11 @@
                         <h1>{{slide.title}}</h1>
                         <h3>{{slide.subtitle}}</h3>
                         <div fxLayout="row" fxLayoutAlign="center start">
-                            <span class="old-price text-muted"><span *ngIf="(products | filterById : slide.productId)?.oldPrice">
-                                {{(products | filterById : slide.productId)?.oldPrice | number : '1.2-2'}}€</span></span>
-                            <span class="new-price">{{(products | filterById : slide.productId)?.newPrice | number : '1.2-2'}}€</span>
+                            <span class="old-price text-muted"><span *ngIf="(products | filterById : slide?.productId)?.oldPrice">
+                                {{(products | filterById : slide?.productId)?.oldPrice | number : '1.2-2'}}€</span></span>
+                            <span class="new-price">{{(products | filterById : slide?.productId)?.newPrice | number : '1.2-2'}}€</span>
                         </div>
-                        <button [routerLink]="['/products', slide.productId, slide.productId]" mat-raised-button color="primary"> Voir plus</button>
+                        <button [routerLink]="['/products', slide?.productId, slide?.productId]" mat-raised-button color="primary"> Voir plus</button>
                     </div>
                 </div>
             </div>

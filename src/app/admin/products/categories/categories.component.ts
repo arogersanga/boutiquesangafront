@@ -59,12 +59,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(category => {
       if (category) {
-        console.log(category.parentId + '0');
+       //  console.log(category.parentId + '0');
         this.category.parentId = Number(category.parentId);
         if (category._links) {
           const index: number = this.categories.findIndex(x => x.id === category.id);
           this.categories[index] = category;
-          console.log(category + '1');
+         //  console.log(category + '1');
           this.categoriesMap.set(category.id, category);
           this.appService.updateCategory(category);
         } else {
@@ -77,9 +77,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           // category.id = + this.getLastIdCategory() + 1;
           this.categories.unshift(category);
           //this.categoriesMap.set(category.id, category);
-          console.log(this.category.parentId + '2');
+         //  console.log(this.category.parentId + '2');
           this.appService.addCategory(this.category);
-          console.log(this.category);
+         //  console.log(this.category);
         }
       }
     });
@@ -108,8 +108,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         const index: number = this.categories.indexOf(category);
         if (index !== -1) {
           this.category.name = category.name
-          console.log(category.name + ' : category a supprimer dans le composant');
-          console.log(index + ' : index category a supprimer dans le composant');
+         //  console.log(category.name + ' : category a supprimer dans le composant');
+         //  console.log(index + ' : index category a supprimer dans le composant');
           this.categoriesMap.delete(category.id);
           this.appService.removeCategory(category);
           this.categories.splice(index, 1);

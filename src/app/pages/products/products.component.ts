@@ -105,7 +105,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (window.innerWidth < 1280) {
       this.viewCol = 33.3;
     }
-    
+    console.log('11111 dans products.ts 2222 categoryRoute');
     this.activatedRoute.url.subscribe(url => {
       console.log(url.toString() + 'dans products.ts 2222 categoryRoute');
       if (url.toString() && url.toString().length > 0) {
@@ -124,7 +124,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (next) {
         this.products = next._embedded.products;
       }
-      console.log(this.products + ' dans getAllProds productsComponent')
+     //  console.log(this.products + ' dans getAllProds productsComponent')
     });
 
   }
@@ -133,24 +133,37 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.appService.getCategories().subscribe(next => {
       if (next) {
         this.categories = next._embedded.categories;
-        console.log(this.categories + ' dans getAllCategories productsComponent')
+       //  console.log(this.categories + ' dans getAllCategories productsComponent')
       }
     });
   }
 
   getProductsByActivatedRoute(url: string): Product[] {
     this.products = [];
-    this.appService.getProductsByCategoryName(url).subscribe(next => {
-      if (next){
-        this.products = next;
-      }
-    });
+    if (url.includes('productsListByLikeName')) {
+      console.log(url + 'url dans products apres navigate');
+      let labelSearch = url.split(',')[2];
+      this.appService.getProductsByLikeName(labelSearch).subscribe(next => {
+        if (next){
+          this.products = next;
+          console.log(this.products + ' prods trouvés dans products apres navigate');
+        }
+      });
+    
+    } else {
+      this.appService.getProductsByCategoryName(url).subscribe(next => {
+        if (next){
+          this.products = next;
+        }
+      });
+    
+    }
     return this.products;
   }
 
   ngAfterViewInit() {
     this.activatedRoute.url.subscribe(url => {
-      console.log(url.toString() + 'dans products.ts 2222 categoryRoute');
+       console.log(url.toString() + 'dans products.ts activatedRoute');
       if (url.toString() && url.toString().length > 0) {
         this.getProductsByActivatedRoute(url.toString());
       } else {
@@ -178,7 +191,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (next) {
           this.affichages = next._embedded.affichages;
-          // console.log(this.affichages + 'affich list');
+          ////  console.log(this.affichages + 'affich list');
         }
       },
         error => {

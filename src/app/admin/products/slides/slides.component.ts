@@ -42,7 +42,7 @@ export class SlidesComponent implements OnInit {
           if (next) {
             this.affichages = next._embedded.affichages;
           }
-          console.log(this.affichages + ' affichages after assignment');
+         //  console.log(this.affichages + ' affichages after assignment');
           },
           error => {
             this.handleError(error);
@@ -89,7 +89,7 @@ export class SlidesComponent implements OnInit {
             this.slide.productId = slide.productId;
             this.slide.subtitle = slide.subtitle;
             this.slide.title = slide.title;
-            console.log(this.slide.productId + '  mon slide ');
+           //  console.log(this.slide.productId + '  mon slide ');
             this.slides.unshift(this.slide);
             this.appService.addSlides(this.slide);
             

@@ -14,32 +14,32 @@ import { Settings, AppSettings } from 'src/app/app.settings';
   styleUrls: ['./product-caroussel.component.scss']
 })
 export class ProductCarousselComponent implements OnInit, AfterViewInit {
-  //@Input() products1: Array<Product>;
-  public products: Array<Product> = [];
+
   public images: Array<Image> = [];
+ 
+  @Input('products') products: Array<Product> = [];
   public config: SwiperConfigInterface = {};
   public settings: Settings;
-  constructor(public appSettings: AppSettings, public appService: AppService, public dialog: MatDialog, private router: Router) {
+  constructor(public appSettings:AppSettings, public appService:AppService, public dialog: MatDialog, private router: Router) { 
     this.settings = this.appSettings.settings;
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.getAllImages();
-    this.getAllProducts();
-   }
-
-  ngAfterViewInit() {
+  }
+  
+  ngAfterViewInit(){
     this.config = {
       observer: true,
       slidesPerView: 1,
-      spaceBetween: 16,
+      spaceBetween: 16,       
       keyboard: true,
       navigation: true,
       pagination: false,
-      grabCursor: true,
+      grabCursor: true,        
       loop: false,
       preloadImages: false,
-      lazy: true,
+      lazy: true,  
       breakpoints: {
         480: {
           slidesPerView: 1
@@ -57,22 +57,13 @@ export class ProductCarousselComponent implements OnInit, AfterViewInit {
           slidesPerView: 5
         }
       }
-    };
+    }
   }
   public getAllImages() {
     this.images = [];
     this.appService.getAllImages().subscribe(next => {
       if (next) {
         this.images = next._embedded.images;
-      }
-      });
-  }
-
-  public getAllProducts() {
-    this.products = [];
-    this.appService.getAllProducts().subscribe(next => {
-      if (next) {
-        this.products = next._embedded.products;
       }
       });
   }

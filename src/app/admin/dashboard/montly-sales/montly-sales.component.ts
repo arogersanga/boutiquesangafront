@@ -26,7 +26,7 @@ export class MontlySalesComponent implements OnInit {
   }
   
   public onSelect(event) {
-    console.log(event);
+   //  console.log(event);
   }
 
   ngAfterViewChecked() {    

@@ -30,14 +30,18 @@
             </div>
             <div fxFlex fxShow="false" fxShow.gt-sm>
                 <form method="get" class="search-form" fxLayout="row">
-                    <button mat-raised-button [matMenuTriggerFor]="categoriesMenu" #categoriesMenuTrigger="matMenuTrigger" type="button" class="mat-elevation-z0 categories text-truncate text-muted">{{category?.name}}<mat-icon>arrow_drop_down</mat-icon></button>
+                    <button mat-raised-button [matMenuTriggerFor]="categoriesMenu" #categoriesMenuTrigger="matMenuTrigger" type="button" class="mat-elevation-z0 categories text-truncate text-muted">
+                        {{category?.name}}<mat-icon>arrow_drop_down</mat-icon></button>
                     <mat-menu #categoriesMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="categories-dropdown">
                         <span (mouseleave)="categoriesMenuTrigger.closeMenu()">
                             <app-category-list [categories]="categories" [categoryParentId]="0" (change)="changeCategory($event)"></app-category-list>
                         </span>
                     </mat-menu>
-                    <input type="text" placeholder="Type to search..." fxFlex>
-                    <button mat-mini-fab (click)="search()" type="button" class="search-btn mat-elevation-z0 text-muted">
+                    <input type="text" placeholder="Type to search name" class="form-control" [matAutocomplete]="auto" id="inputAutocomplete" [(ngModel)]="labelSearch" [value]="product? product.name : ''" (keyup)="filter()" name="inputProductName" fxFlex/>
+                    <mat-autocomplete #auto="matAutocomplete" id="responseAPI" [displayWith]="displayFn" (optionSelected)="onProductNameChanged($event.option.value)">
+                        <mat-option *ngFor="let product of responseProductsFiltered" [value]="product">{{product.name}}</mat-option>
+                    </mat-autocomplete>
+                    <button mat-mini-fab (click)="filterProducts(labelSearch)" type="button" class="search-btn mat-elevation-z0 text-muted">
                         <mat-icon>search</mat-icon>
                     </button>
                 </form>
